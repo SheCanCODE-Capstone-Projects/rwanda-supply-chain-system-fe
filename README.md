@@ -1,36 +1,275 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rwanda Supply Chain Network (RSCN) – Frontend
+
+> **Connecting Every Product, Every Business, Every Movement.**
+
+The **Rwanda Supply Chain Network (RSCN) Frontend** is the user interface of the Rwanda Supply Chain Network platform, built with **Next.js**, **TypeScript**, and **Tailwind CSS**. It provides a modern, responsive, and scalable web application for all stakeholders in Rwanda's supply chain ecosystem.
+
+This repository contains only the frontend application and follows a modular architecture that supports collaboration among multiple developers.
+
+---
+
+## Project Overview
+
+The frontend provides role-based dashboards and interfaces for different users across the supply chain, including farmers, manufacturers, warehouse managers, transport companies, retailers, buyers, financial institutions, and government officers.
+
+Each user has a dedicated dashboard, navigation, permissions, and workflows while sharing the same enterprise design system.
+
+---
+
+## Technology Stack
+
+* Next.js (App Router)
+* React 19
+* TypeScript
+* Tailwind CSS
+* React Hook Form
+* Zod
+* Lucide React
+* JWT Authentication
+* Google OAuth
+* ESLint
+* Prettier
+
+---
+
+## Frontend Features
+
+### Authentication
+
+* Email & Password Login
+* Continue with Google
+* Password Strength Indicator
+* Forgot Password
+* Reset Password
+* Email Verification
+* JWT Authentication
+* Role Selection
+
+---
+
+### Role-Based Dashboards
+
+Dedicated dashboards for:
+
+* Super Administrator
+* Government Officer
+* Farmer
+* Cooperative
+* Manufacturer
+* Supplier
+* Buyer
+* Retailer
+* Warehouse Manager
+* Transport Company
+* Driver
+* Financial Institution
+
+---
+
+### Core Modules
+
+* Authentication
+* User Profile
+* Products
+* Inventory
+* Marketplace
+* Procurement
+* Warehouse Management
+* Transportation
+* Orders
+* Analytics
+* Reports
+* Notifications
+* Messaging
+* Settings
+
+---
+
+## Project Structure
+
+```text
+rscn-frontend/
+│
+├── public/
+│   ├── images/
+│   ├── icons/
+│   ├── logos/
+│   └── favicon.ico
+│
+├── src/
+│   ├── app/
+│   │   ├── (public)/
+│   │   ├── (auth)/
+│   │   ├── admin/
+│   │   ├── government/
+│   │   ├── farmer/
+│   │   ├── cooperative/
+│   │   ├── manufacturer/
+│   │   ├── supplier/
+│   │   ├── buyer/
+│   │   ├── retailer/
+│   │   ├── warehouse/
+│   │   ├── transport/
+│   │   ├── driver/
+│   │   ├── bank/
+│   │   ├── unauthorized/
+│   │   ├── layout.tsx
+│   │   ├── loading.tsx
+│   │   ├── error.tsx
+│   │   ├── not-found.tsx
+│   │   └── globals.css
+│   │
+│   ├── components/
+│   │   ├── ui/
+│   │   ├── common/
+│   │   ├── layouts/
+│   │   ├── navigation/
+│   │   ├── dashboard/
+│   │   ├── charts/
+│   │   ├── forms/
+│   │   ├── maps/
+│   │   └── tables/
+│   │
+│   ├── features/
+│   ├── hooks/
+│   ├── providers/
+│   ├── services/
+│   ├── store/
+│   ├── config/
+│   ├── constants/
+│   ├── contexts/
+│   ├── lib/
+│   ├── styles/
+│   ├── types/
+│   ├── utils/
+│   └── assets/
+│
+├── .env.local
+├── next.config.ts
+├── tsconfig.json
+├── package.json
+├── eslint.config.js
+├── README.md
+└── FRONTEND_GUIDE.md
+```
+
+---
+
+## Design Principles
+
+The project follows a centralized design system to ensure consistency across all dashboards.
+
+* Single primary brand color
+* Shared typography
+* Shared spacing system
+* Reusable UI components
+* Responsive layouts
+* Accessible interfaces
+* Dark mode support
+* Multi-language support (English, Kinyarwanda, French)
+
+---
+
+## Team Development Guidelines
+
+All developers should:
+
+* Follow the existing folder structure.
+* Use reusable components from `src/components/ui`.
+* Avoid duplicate components.
+* Follow TypeScript best practices.
+* Keep components modular and reusable.
+* Write responsive interfaces.
+* Maintain consistent naming conventions.
+* Submit changes through Pull Requests.
+
+---
+
+## Git Workflow
+
+Main branches:
+
+* `main` – Stable production-ready code
+* `develop` – Integration branch
+
+Feature branches:
+
+* `feature/authentication`
+* `feature/business`
+* `feature/logistics`
+* `feature/admin`
+
+All new work should be developed in feature branches and merged into `develop` after code review.
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Clone the Repository
+
+```bash
+git clone <repository-url>
+cd rscn-frontend
+```
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Start the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Project Status
 
-To learn more about Next.js, take a look at the following resources:
+### Frontend Development in Progress
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Current milestone:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* Project setup
+* Folder structure
+* Design system
+* Authentication
+* Role-based dashboards
+* Reusable components
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contributors
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Frontend Team (4 Developers)
+
+* Frontend Developer 1 – Core Platform & Authentication
+* Frontend Developer 2 – Marketplace & Business Operations
+* Frontend Developer 3 – Logistics & Supply Chain
+* Frontend Developer 4 – Administration & Analytics
+
+---
+
+## Future Enhancements
+
+* Progressive Web App (PWA)
+* Offline support
+* Real-time notifications
+* Advanced analytics dashboards
+* AI-powered demand forecasting
+* Performance optimization
+* Automated UI testing
+
+---
+
+## License
+
+This project is developed for educational and capstone purposes. Licensing will be determined before public release.
