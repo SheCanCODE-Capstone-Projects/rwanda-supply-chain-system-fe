@@ -1,0 +1,30 @@
+export const ROUTES = {
+  HOME: "/",
+  PRICING: "/pricing",
+  INDUSTRIES: "/industries",
+  ABOUT: "/about",
+  CONTACT: "/contact",
+
+  LOGIN: "/login",
+  REGISTER: "/register",
+  FORGOT_PASSWORD: "/forgot-password",
+  RESET_PASSWORD: "/reset-password",
+  VERIFY_EMAIL: "/verify-email",
+  VERIFY_OTP: "/verify-otp",
+  COMPLETE_PROFILE: "/complete-profile",
+
+  ADMIN: "/admin",
+  GOVERNMENT: "/government",
+  FARMER: "/farmer",
+  COOPERATIVE: "/cooperative",
+  MANUFACTURER: "/manufacturer",
+  SUPPLIER: "/supplier",
+  BUYER: "/buyer",
+  RETAILER: "/retailer",
+  WAREHOUSE: "/warehouse",
+  TRANSPORT: "/transport",
+  DRIVER: "/driver",
+  BANK: "/bank",
+
+  UNAUTHORIZED: "/unauthorized",
+} as const;
