@@ -17,184 +17,65 @@ import {
   UsersRound,
   Warehouse,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
-type IconComponent = ComponentType<{
-  className?: string;
-  size?: number;
-  strokeWidth?: number;
-}>;
+type IconComponent = ComponentType<{ className?: string; size?: number; strokeWidth?: number }>;
 
 const stats = [
   { value: "12,480+", label: "Businesses onboarded" },
-  { value: "48", label: "Districts covered" },
-  { value: "1.2M", label: "Tons moved / year" },
-  { value: "99.9%", label: "Platform uptime" },
+  { value: "48",      label: "Districts covered" },
+  { value: "1.2M",   label: "Tons moved / year" },
+  { value: "99.9%",  label: "Platform uptime" },
 ];
 
 const problems = [
-  {
-    title: "Invisible inventory",
-    description:
-      "Producers, warehouses and retailers can't see each other's stock in real time.",
-  },
-  {
-    title: "Manual logistics",
-    description:
-      "Transport is booked over phone; deliveries lose 20-30% of value to delays.",
-  },
-  {
-    title: "Broken financing",
-    description:
-      "Banks and buyers can't verify inventory, contracts or transactions on paper.",
-  },
+  { title: "Invisible inventory",  description: "Producers, warehouses and retailers can't see each other's stock in real time." },
+  { title: "Manual logistics",     description: "Transport is booked over phone; deliveries lose 20–30% of value to delays." },
+  { title: "Broken financing",     description: "Banks and buyers can't verify inventory, contracts or transactions on paper." },
 ];
 
 const workflow = [
-  {
-    step: "01",
-    icon: Sprout,
-    title: "Produce",
-    description:
-      "Farmers & cooperatives list produce with quality and quantity.",
-  },
-  {
-    step: "02",
-    icon: Warehouse,
-    title: "Store",
-    description:
-      "Warehouses reserve space and track stock, temperature, expiry.",
-  },
-  {
-    step: "03",
-    icon: Truck,
-    title: "Move",
-    description: "Transporters accept jobs, optimize routes, prove delivery.",
-  },
-  {
-    step: "04",
-    icon: ShoppingCart,
-    title: "Sell",
-    description:
-      "Buyers, retailers and exporters procure, pay and reconcile.",
-  },
+  { step: "01", icon: Sprout,       title: "Produce", description: "Farmers & cooperatives list produce with quality and quantity." },
+  { step: "02", icon: Warehouse,    title: "Store",   description: "Warehouses reserve space and track stock, temperature, expiry." },
+  { step: "03", icon: Truck,        title: "Move",    description: "Transporters accept jobs, optimize routes, prove delivery." },
+  { step: "04", icon: ShoppingCart, title: "Sell",    description: "Buyers, retailers and exporters procure, pay and reconcile." },
 ];
 
 const modules = [
-  {
-    icon: UsersRound,
-    title: "Identity & Organizations",
-    description:
-      "KYC, business verification, roles, departments, audit logs.",
-  },
-  {
-    icon: Package,
-    title: "Products & Inventory",
-    description:
-      "Batches, barcodes, QR, quality certificates, expiry tracking.",
-  },
-  {
-    icon: ShoppingCart,
-    title: "Smart Marketplace",
-    description: "RFQs, negotiation, contracts, purchase & sales orders.",
-  },
-  {
-    icon: Warehouse,
-    title: "Warehousing",
-    description: "Zones, racks, reservations, temperature monitoring.",
-  },
-  {
-    icon: Truck,
-    title: "Transportation",
-    description: "Fleet, GPS, route optimization, proof of delivery.",
-  },
-  {
-    icon: Boxes,
-    title: "Procurement",
-    description: "Supplier directory, comparisons, POs, performance.",
-  },
+  { icon: UsersRound,   title: "Identity & Organizations", description: "KYC, business verification, roles, departments, audit logs." },
+  { icon: Package,      title: "Products & Inventory",     description: "Batches, barcodes, QR, quality certificates, expiry tracking." },
+  { icon: ShoppingCart, title: "Smart Marketplace",        description: "RFQs, negotiation, contracts, purchase & sales orders." },
+  { icon: Warehouse,    title: "Warehousing",              description: "Zones, racks, reservations, temperature monitoring." },
+  { icon: Truck,        title: "Transportation",           description: "Fleet, GPS, route optimization, proof of delivery." },
+  { icon: Boxes,        title: "Procurement",              description: "Supplier directory, comparisons, POs, performance." },
 ];
 
 const stakeholders = [
-  {
-    icon: Sprout,
-    title: "For producers",
-    benefits: [
-      "Reach buyers nationally",
-      "Get paid on delivery",
-      "Track quality & batches",
-    ],
-  },
-  {
-    icon: Factory,
-    title: "For businesses",
-    benefits: [
-      "Real-time inventory",
-      "Automated procurement",
-      "One-click transport",
-    ],
-  },
-  {
-    icon: Landmark,
-    title: "For government",
-    benefits: [
-      "National production visibility",
-      "Food security dashboard",
-      "Policy-grade analytics",
-    ],
-  },
+  { icon: Sprout,   title: "For producers",  benefits: ["Reach buyers nationally", "Get paid on delivery", "Track quality & batches"] },
+  { icon: Factory,  title: "For businesses", benefits: ["Real-time inventory", "Automated procurement", "One-click transport"] },
+  { icon: Landmark, title: "For government", benefits: ["National production visibility", "Food security dashboard", "Policy-grade analytics"] },
 ];
 
 const testimonials = [
-  {
-    quote: "We moved from paper receipts to real-time inventory in a week.",
-    name: "Aline U.",
-    role: "Manager, Musanze Cooperative",
-  },
-  {
-    quote: "Our transport costs dropped 22% after route optimization.",
-    name: "Eric N.",
-    role: "Ops Director, Kigali Logistics",
-  },
-  {
-    quote:
-      "For the first time we have national food supply data by district.",
-    name: "Dr. P. Habimana",
-    role: "MINAGRI",
-  },
+  { quote: "We moved from paper receipts to real-time inventory in a week.",    name: "Aline U.",        role: "Manager, Musanze Cooperative" },
+  { quote: "Our transport costs dropped 22% after route optimization.",         name: "Eric N.",         role: "Ops Director, Kigali Logistics" },
+  { quote: "For the first time we have national food supply data by district.", name: "Dr. P. Habimana", role: "MINAGRI" },
 ];
 
 const partners = ["MINAGRI", "RRA", "BNR", "MINICOM", "RSSB", "RIB"];
 
 const plans = [
-  {
-    name: "Starter",
-    price: "Free",
-    audience: "For farmers & small retailers",
-    features: ["Up to 100 products", "Marketplace access", "Basic reporting"],
-  },
-  {
-    name: "Business",
-    price: "RWF 45,000/mo",
-    audience: "For SMEs & cooperatives",
-    popular: true,
-    features: [
-      "Unlimited products",
-      "Warehouse & transport",
-      "Advanced analytics",
-      "Priority support",
-    ],
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    audience: "For institutions & government",
-    features: [
-      "National dashboards",
-      "SLA & dedicated support",
-      "Custom integrations",
-      "On-premise options",
-    ],
-  },
+  { name: "Starter",    price: "Free",          audience: "For farmers & small retailers", popular: false, features: ["Up to 100 products", "Marketplace access", "Basic reporting"] },
+  { name: "Business",   price: "RWF 45,000/mo", audience: "For SMEs & cooperatives",       popular: true,  features: ["Unlimited products", "Warehouse & transport", "Advanced analytics", "Priority support"] },
+  { name: "Enterprise", price: "Custom",         audience: "For institutions & government", popular: false, features: ["National dashboards", "SLA & dedicated support", "Custom integrations", "On-premise options"] },
 ];
 
 const faqs = [
@@ -205,552 +86,494 @@ const faqs = [
 ];
 
 const footerColumns = [
-  {
-    title: "Platform",
-    links: ["Solutions", "Industries", "Pricing", "Partners"],
-  },
-  {
-    title: "Company",
-    links: ["About", "Resources", "Contact", "Book Demo"],
-  },
-  {
-    title: "Account",
-    links: ["Login", "Register", "Forgot Password", "Dashboard"],
-  },
+  { title: "Platform", links: ["Solutions", "Industries", "Pricing", "Partners"] },
+  { title: "Company",  links: ["About", "Resources", "Contact", "Book Demo"] },
+  { title: "Account",  links: ["Login", "Register", "Forgot Password", "Dashboard"] },
 ];
 
+// ─── Shared layout wrapper ────────────────────────────────────────────────────
+function Container({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <div className={`mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-10 ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+// ─── Logo ─────────────────────────────────────────────────────────────────────
 function LogoMark() {
   return (
-    <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#05662d] text-xl font-bold text-white">
+    <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-base font-bold text-primary-foreground">
       R
     </span>
   );
 }
 
-function SectionTitle({
-  eyebrow,
-  title,
-  className = "",
-}: {
-  eyebrow: string;
-  title: string;
-  className?: string;
-}) {
+// ─── Section heading ──────────────────────────────────────────────────────────
+function SectionHeading({ eyebrow, title }: { eyebrow: string; title: string }) {
   return (
-    <div className={`mx-auto max-w-4xl text-center ${className}`}>
-      <p className="text-sm font-bold uppercase text-[#006b35]">{eyebrow}</p>
-      <h2 className="mt-4 text-4xl font-extrabold leading-tight text-[#061226] md:text-5xl">
-        {title}
-      </h2>
+    <div className="mx-auto max-w-2xl text-center">
+      <p className="text-sm font-semibold uppercase tracking-widest text-primary">{eyebrow}</p>
+      <h2 className="mt-4 text-4xl font-bold tracking-tight text-foreground">{title}</h2>
     </div>
   );
 }
 
-function IconTile({
-  icon: Icon,
-  tone = "green",
-}: {
-  icon: IconComponent;
-  tone?: "green" | "blue" | "red";
-}) {
+// ─── Icon tile ────────────────────────────────────────────────────────────────
+function IconTile({ icon: Icon, tone = "green" }: { icon: IconComponent; tone?: "green" | "blue" | "red" }) {
   const styles = {
-    green: "bg-[#e8f3ee] text-[#00733b]",
-    blue: "bg-[#eaf0ff] text-[#2563eb]",
-    red: "bg-[#ffe9ec] text-[#ff2f35]",
+    green: "bg-primary/10 text-primary",
+    blue:  "bg-blue-50 text-blue-600",
+    red:   "bg-red-50 text-red-500",
   };
-
   return (
-    <span
-      className={`flex h-12 w-12 items-center justify-center rounded-lg ${styles[tone]}`}
-    >
-      <Icon className="h-6 w-6" strokeWidth={2.4} />
+    <span className={`flex h-11 w-11 items-center justify-center rounded-xl ${styles[tone]}`}>
+      <Icon className="h-5 w-5" strokeWidth={2} />
     </span>
   );
 }
 
+// ─── Check list item ──────────────────────────────────────────────────────────
 function CheckItem({ children }: { children: React.ReactNode }) {
   return (
-    <li className="flex items-center gap-3 text-lg text-[#5f6c80]">
-      <CheckCircle2 className="h-5 w-5 shrink-0 text-[#00733b]" />
+    <li className="flex items-center gap-3 text-sm text-muted-foreground">
+      <CheckCircle2 className="h-4 w-4 shrink-0 text-primary" />
       <span>{children}</span>
     </li>
   );
 }
 
+// ─── Dashboard mock ───────────────────────────────────────────────────────────
 function DashboardMock() {
   const shipments = [
-    {
-      name: "Maize",
-      amount: "12 tons",
-      route: "Musanze -> Kigali",
-      status: "In transit",
-      statusClass: "bg-[#eef2ff] text-[#1d4ed8]",
-    },
-    {
-      name: "Coffee",
-      amount: "8 tons",
-      route: "Huye -> Rusizi",
-      status: "Delivered",
-      statusClass: "bg-[#dff3e8] text-[#00733b]",
-    },
-    {
-      name: "Fertilizer",
-      amount: "40 pallets",
-      route: "Kigali -> Nyagatare",
-      status: "Loading",
-      statusClass: "bg-[#fff6df] text-[#e28a00]",
-    },
+    { name: "Maize",      amount: "12 tons",    route: "Musanze → Kigali",   status: "In transit", dot: "bg-blue-500",   badge: "bg-blue-50 text-blue-700" },
+    { name: "Coffee",     amount: "8 tons",     route: "Huye → Rusizi",      status: "Delivered",  dot: "bg-primary",    badge: "bg-primary/10 text-primary" },
+    { name: "Fertilizer", amount: "40 pallets", route: "Kigali → Nyagatare", status: "Loading",    dot: "bg-amber-500",  badge: "bg-amber-50 text-amber-700" },
   ];
 
   return (
-    <div className="rounded-lg border border-[#d9e1ea] bg-[#f5f8fb] p-5 shadow-lg">
-      <div className="rounded-lg border border-[#d9e1ea] bg-white p-6">
-        <div className="flex items-start justify-between border-b border-[#d9e1ea] pb-5">
-          <div>
-            <p className="text-base text-[#5f6c80]">
-              National Dashboard &middot; Q3 2026
-            </p>
-            <p className="mt-1 text-lg font-bold text-[#061226]">
-              Live supply activity
-            </p>
+    <div className="rounded-3xl border border-border bg-muted/40 p-6 shadow-lg">
+      <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
+
+        {/* Header */}
+        <div className="flex items-start justify-between border-b border-border pb-5">
+          <div className="space-y-1">
+            <p className="text-xs text-muted-foreground">National Dashboard · Q3 2026</p>
+            <p className="text-sm font-semibold text-foreground">Live supply activity</p>
           </div>
-          <span className="flex items-center gap-2 text-base text-[#00733b]">
-            <span className="h-2.5 w-2.5 rounded-full bg-[#45ad73]" />
+          <span className="flex items-center gap-2 text-xs font-medium text-primary">
+            <span className="h-2 w-2 rounded-full bg-primary" />
             Live
           </span>
         </div>
 
-        <div className="mt-5 grid gap-4 sm:grid-cols-3">
+        {/* KPI tiles */}
+        <div className="grid gap-4 sm:grid-cols-3">
           {[
             ["Active orders", "12,483", "+8.2%"],
-            ["In transit", "1,204", "+3.1%"],
-            ["Warehouse fill", "68%", "+1.4%"],
+            ["In transit",    "1,204",  "+3.1%"],
+            ["Warehouse fill","68%",    "+1.4%"],
           ].map(([label, value, change]) => (
-            <div
-              key={label}
-              className="rounded-lg border border-[#d9e1ea] bg-[#f4f7fb] p-4"
-            >
-              <p className="text-sm text-[#68758a]">{label}</p>
-              <p className="mt-2 text-3xl font-extrabold text-[#061226]">
-                {value}
-              </p>
-              <p className="mt-1 text-sm text-[#00733b]">{change}</p>
+            <div key={label} className="space-y-1 rounded-xl border border-border bg-muted/50 p-4">
+              <p className="text-xs text-muted-foreground">{label}</p>
+              <p className="text-2xl font-bold tracking-tight text-foreground">{value}</p>
+              <p className="text-xs font-medium text-primary">{change}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-5 space-y-3">
-          {shipments.map((shipment) => (
-            <div
-              key={shipment.name}
-              className="flex items-center justify-between rounded-lg border border-[#d9e1ea] px-4 py-3"
-            >
-              <div>
-                <p className="text-lg font-bold text-[#061226]">
-                  {shipment.name} &middot; {shipment.amount}
-                </p>
-                <p className="text-sm text-[#5f6c80]">{shipment.route}</p>
+        {/* Shipment rows */}
+        <div className="space-y-2">
+          {shipments.map((s) => (
+            <div key={s.name} className="flex items-center justify-between rounded-xl border border-border px-4 py-3">
+              <div className="flex items-center gap-3">
+                <span className={`h-2 w-2 rounded-full ${s.dot}`} />
+                <div>
+                  <p className="text-sm font-semibold text-foreground">{s.name} · {s.amount}</p>
+                  <p className="text-xs text-muted-foreground">{s.route}</p>
+                </div>
               </div>
-              <span
-                className={`rounded-lg px-3 py-1 text-sm font-semibold ${shipment.statusClass}`}
-              >
-                {shipment.status}
-              </span>
+              <span className={`rounded-lg px-2.5 py-1 text-xs font-medium ${s.badge}`}>{s.status}</span>
             </div>
           ))}
         </div>
+
       </div>
     </div>
   );
 }
 
+// ─── Page ─────────────────────────────────────────────────────────────────────
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-white text-[#061226]">
-      <header className="border-b border-[#d9e1ea] bg-white">
-        <nav className="mx-auto flex h-[84px] max-w-[1550px] items-center justify-between px-6">
-          <Link href="/" className="flex items-center gap-3">
-            <LogoMark />
-            <span className="text-xl font-extrabold">RSCN</span>
-            <span className="hidden text-base text-[#657184] sm:inline">
-              &middot; Rwanda Supply Chain Network
-            </span>
-          </Link>
+    <main className="min-h-screen bg-background text-foreground">
 
-          <div className="hidden items-center gap-2 md:flex">
-            <Link
-              href="/"
-              className="rounded-lg bg-[#e8f3ee] px-4 py-3 text-lg font-semibold text-[#006b35]"
-            >
-              Home
+      {/* ── Nav ── */}
+      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-sm">
+        <Container>
+          <nav className="flex h-20 items-center justify-between gap-12">
+            <Link href="/" className="flex items-center gap-3">
+              <LogoMark />
+              <span className="text-base font-bold tracking-tight text-foreground">RSCN</span>
+              <span className="hidden text-sm text-muted-foreground sm:inline">· Rwanda Supply Chain Network</span>
             </Link>
-            <a
-              href="#pricing"
-              className="rounded-lg px-4 py-3 text-lg font-semibold text-[#657184]"
-            >
-              Pricing
-            </a>
-            <a
-              href="#industries"
-              className="rounded-lg px-4 py-3 text-lg font-semibold text-[#657184]"
-            >
-              Industries
-            </a>
-          </div>
 
-          <div className="flex items-center gap-4">
-            <Link href="/login" className="text-lg font-semibold text-[#111827]">
-              Login
-            </Link>
-            <Link
-              href="/register"
-              className="rounded-lg bg-[#05662d] px-5 py-3 text-lg font-bold text-white"
-            >
-              Register
-            </Link>
-          </div>
-        </nav>
+            <div className="hidden items-center gap-8 md:flex">
+              <Link href="/" className="text-sm font-medium text-primary">Home</Link>
+              <a href="#modules"    className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">Platform</a>
+              <a href="#pricing"    className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">Pricing</a>
+              <a href="#industries" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">Industries</a>
+            </div>
+
+            <div className="flex items-center gap-4">
+              <Link href="/login" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+                Log in
+              </Link>
+              <Button asChild size="sm">
+                <Link href="/register">Get started</Link>
+              </Button>
+            </div>
+          </nav>
+        </Container>
       </header>
 
-      <section className="mx-auto grid max-w-[1550px] items-center gap-16 px-6 py-28 lg:grid-cols-[1fr_0.95fr]">
-        <div>
-          <div className="inline-flex items-center gap-3 rounded-full border border-[#d9e1ea] bg-[#f8fafc] px-4 py-2 text-base text-[#5f6c80]">
-            <span className="h-2 w-2 rounded-full bg-[#00733b]" />
-            National digital infrastructure
-          </div>
+      {/* ── Hero ── */}
+      <section className="py-24">
+        <Container>
+          <div className="grid items-center gap-20 lg:grid-cols-2">
 
-          <h1 className="mt-7 max-w-[720px] text-6xl font-extrabold leading-[0.98] text-[#111827] md:text-7xl">
-            Rwanda&apos;s national supply chain, connected.
-          </h1>
+            {/* Left */}
+            <div className="space-y-8">
+              <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/60 px-4 py-1.5 text-sm text-muted-foreground">
+                <span className="h-2 w-2 rounded-full bg-primary" />
+                National digital infrastructure
+              </div>
 
-          <p className="mt-8 max-w-[720px] text-2xl leading-9 text-[#5f6c80]">
-            RSCN unifies farmers, cooperatives, manufacturers, warehouses,
-            transporters, retailers, banks and government into one intelligent
-            platform - from harvest to shelf.
-          </p>
+              <div className="space-y-6">
+                <h1 className="max-w-[600px] text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl xl:text-7xl">
+                  Rwanda&apos;s national supply chain, connected.
+                </h1>
+                <p className="max-w-[550px] text-lg leading-8 text-muted-foreground">
+                  RSCN unifies farmers, cooperatives, manufacturers, warehouses, transporters, retailers, banks and government into one intelligent platform — from harvest to shelf.
+                </p>
+              </div>
 
-          <div className="mt-11 flex flex-wrap items-center gap-4">
-            <Link
-              href="/register"
-              className="inline-flex h-14 items-center gap-3 rounded-lg bg-[#05662d] px-6 text-lg font-extrabold text-white"
-            >
-              Get Started
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-            <button
-              type="button"
-              className="inline-flex h-14 items-center gap-3 rounded-lg border border-[#d9e1ea] bg-white px-6 text-lg font-extrabold text-[#061226]"
-            >
-              <CirclePlay className="h-5 w-5" />
-              Watch Demo
-            </button>
-            <a
-              href="#modules"
-              className="inline-flex h-14 items-center gap-3 px-6 text-lg font-extrabold text-[#006b35]"
-            >
-              Explore Platform
-              <ArrowRight className="h-5 w-5" />
-            </a>
-          </div>
+              <div className="flex flex-wrap items-center gap-4">
+                <Button asChild size="lg" className="gap-2 rounded-xl font-semibold">
+                  <Link href="/register">
+                    Get Started <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button variant="secondary" size="lg" className="gap-2 rounded-xl">
+                  <CirclePlay className="h-4 w-4" /> Watch Demo
+                </Button>
+                <Button variant="link" size="lg" asChild className="gap-2">
+                  <a href="#modules">
+                    Explore Platform <ArrowRight className="h-4 w-4" />
+                  </a>
+                </Button>
+              </div>
 
-          <div className="mt-10 flex flex-wrap gap-x-9 gap-y-4 text-lg text-[#5f6c80]">
-            {[
-              "ISO 27001 aligned",
-              "WCAG AA accessible",
-              "Kinyarwanda / English / French",
-            ].map((item) => (
-              <span key={item} className="inline-flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-[#00733b]" />
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <DashboardMock />
-      </section>
-
-      <section className="border-y border-[#d9e1ea] bg-[#f4f7fb]">
-        <div className="mx-auto grid max-w-[1550px] grid-cols-2 gap-10 px-6 py-14 md:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label}>
-              <p className="text-4xl font-extrabold text-[#061226]">
-                {stat.value}
-              </p>
-              <p className="mt-2 text-lg text-[#5f6c80]">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="border-b border-[#d9e1ea] px-6 py-24">
-        <SectionTitle
-          eyebrow="The problem"
-          title="Rwanda's supply chain is fragmented."
-        />
-        <div className="mx-auto mt-14 grid max-w-[1540px] gap-5 md:grid-cols-3">
-          {problems.map((problem) => (
-            <article
-              key={problem.title}
-              className="rounded-lg border border-[#d9e1ea] bg-white p-8"
-            >
-              <IconTile icon={AlertTriangle} tone="red" />
-              <h3 className="mt-6 text-xl font-extrabold">{problem.title}</h3>
-              <p className="mt-4 text-lg leading-7 text-[#5f6c80]">
-                {problem.description}
-              </p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="border-b border-[#d9e1ea] px-6 py-24">
-        <SectionTitle
-          eyebrow="How RSCN works"
-          title="From harvest to shelf, on one network."
-        />
-        <div className="mx-auto mt-14 grid max-w-[1540px] gap-5 lg:grid-cols-4">
-          {workflow.map((item) => (
-            <article
-              key={item.step}
-              className="relative rounded-lg border border-[#d9e1ea] bg-white p-8"
-            >
-              <span className="absolute right-6 top-6 text-base font-bold text-[#657184]">
-                {item.step}
-              </span>
-              <IconTile icon={item.icon} />
-              <h3 className="mt-6 text-xl font-extrabold">{item.title}</h3>
-              <p className="mt-4 text-lg leading-7 text-[#5f6c80]">
-                {item.description}
-              </p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section id="modules" className="border-b border-[#d9e1ea] px-6 py-24">
-        <SectionTitle
-          eyebrow="Platform modules"
-          title="Everything a national supply chain needs."
-        />
-        <div className="mx-auto mt-14 grid max-w-[1540px] gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {modules.map((module) => (
-            <article
-              key={module.title}
-              className="rounded-lg border border-[#d9e1ea] bg-white p-8"
-            >
-              <IconTile icon={module.icon} tone="blue" />
-              <h3 className="mt-7 text-xl font-extrabold">{module.title}</h3>
-              <p className="mt-4 text-lg leading-7 text-[#5f6c80]">
-                {module.description}
-              </p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section id="industries" className="border-b border-[#d9e1ea] px-6 py-24">
-        <SectionTitle
-          eyebrow="Why RSCN"
-          title="Built for every stakeholder in the chain."
-        />
-        <div className="mx-auto mt-14 grid max-w-[1540px] gap-5 lg:grid-cols-3">
-          {stakeholders.map((stakeholder) => (
-            <article
-              key={stakeholder.title}
-              className="rounded-lg border border-[#d9e1ea] bg-white p-8"
-            >
-              <IconTile icon={stakeholder.icon} />
-              <h3 className="mt-7 text-xl font-extrabold">{stakeholder.title}</h3>
-              <ul className="mt-5 space-y-3">
-                {stakeholder.benefits.map((benefit) => (
-                  <CheckItem key={benefit}>{benefit}</CheckItem>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="border-b border-[#d9e1ea] px-6 py-24">
-        <SectionTitle
-          eyebrow="Testimonials"
-          title="Trusted by cooperatives, exporters and institutions."
-        />
-        <div className="mx-auto mt-14 grid max-w-[1540px] gap-5 lg:grid-cols-3">
-          {testimonials.map((testimonial) => (
-            <article
-              key={testimonial.name}
-              className="rounded-lg border border-[#d9e1ea] bg-white p-8"
-            >
-              <div className="flex gap-1 text-[#f59e0b]">
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <Star key={index} className="h-5 w-5 fill-current" />
+              <div className="flex flex-wrap gap-x-8 gap-y-3">
+                {["ISO 27001 aligned", "WCAG AA accessible", "Kinyarwanda / English / French"].map((item) => (
+                  <span key={item} className="inline-flex items-center gap-2 text-sm text-muted-foreground">
+                    <CheckCircle2 className="h-4 w-4 text-primary" />
+                    {item}
+                  </span>
                 ))}
               </div>
-              <p className="mt-5 text-lg leading-7 text-[#061226]">
-                &quot;{testimonial.quote}&quot;
-              </p>
-              <p className="mt-6 text-lg font-extrabold">{testimonial.name}</p>
-              <p className="text-base text-[#5f6c80]">{testimonial.role}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="border-b border-[#d9e1ea] bg-[#f4f7fb] px-6 py-12">
-        <p className="text-center text-base font-bold uppercase text-[#657184]">
-          Partners & integrations
-        </p>
-        <div className="mx-auto mt-6 grid max-w-[1540px] gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
-          {partners.map((partner) => (
-            <div
-              key={partner}
-              className="rounded-lg border border-[#d9e1ea] bg-white px-8 py-6 text-center text-lg font-extrabold text-[#657184]"
-            >
-              {partner}
             </div>
-          ))}
-        </div>
-      </section>
 
-      <section id="pricing" className="border-b border-[#d9e1ea] px-6 py-24">
-        <SectionTitle
-          eyebrow="Pricing"
-          title="Simple plans for every stakeholder."
-        />
-        <div className="mx-auto mt-14 grid max-w-[1540px] gap-5 lg:grid-cols-3">
-          {plans.map((plan) => (
-            <article
-              key={plan.name}
-              className={`rounded-lg border bg-white p-8 ${
-                plan.popular ? "border-[#00733b]" : "border-[#d9e1ea]"
-              }`}
-            >
-              {plan.popular ? (
-                <span className="inline-flex rounded-full bg-[#00733b] px-3 py-1 text-sm font-extrabold text-white">
-                  Most popular
-                </span>
-              ) : null}
-              <h3 className="mt-4 text-2xl font-extrabold">{plan.name}</h3>
-              <p className="mt-5 text-4xl font-extrabold">{plan.price}</p>
-              <p className="mt-2 text-lg text-[#5f6c80]">{plan.audience}</p>
-              <ul className="mt-8 space-y-3">
-                {plan.features.map((feature) => (
-                  <CheckItem key={feature}>{feature}</CheckItem>
-                ))}
-              </ul>
-              <Link
-                href="/register"
-                className={`mt-8 flex h-12 items-center justify-center rounded-lg border text-lg font-extrabold ${
-                  plan.popular
-                    ? "border-[#05662d] bg-[#05662d] text-white"
-                    : "border-[#d9e1ea] bg-white text-[#061226]"
-                }`}
-              >
-                Get Started
-              </Link>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="border-b border-[#d9e1ea] px-6 py-24">
-        <SectionTitle eyebrow="FAQ" title="Common questions." />
-        <div className="mx-auto mt-14 max-w-[960px] overflow-hidden rounded-lg border border-[#d9e1ea] bg-white">
-          {faqs.map((question) => (
-            <button
-              key={question}
-              type="button"
-              className="flex w-full items-center justify-between border-b border-[#d9e1ea] px-6 py-7 text-left text-lg font-extrabold last:border-b-0"
-            >
-              {question}
-              <Plus className="h-5 w-5 text-[#5f6c80]" />
-            </button>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-[#06662e] px-6 py-10 text-white">
-        <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-4xl font-extrabold leading-tight md:text-5xl">
-            Join Rwanda&apos;s national supply chain network.
-          </h2>
-          <p className="mt-8 text-2xl">
-            Register your business in minutes. No credit card required to start.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link
-              href="/register"
-              className="flex h-14 items-center rounded-lg bg-white px-7 text-lg font-extrabold text-[#05662d]"
-            >
-              Register
-            </Link>
-            <button
-              type="button"
-              className="flex h-14 items-center rounded-lg border border-white/30 px-7 text-lg font-extrabold text-white"
-            >
-              Book Demo
-            </button>
-            <Link
-              href="/contact"
-              className="flex h-14 items-center px-7 text-lg font-extrabold text-white"
-            >
-              Contact Sales
-            </Link>
+            {/* Right */}
+            <DashboardMock />
           </div>
-        </div>
+        </Container>
       </section>
 
-      <footer className="bg-[#f4f7fb]">
-        <div className="mx-auto grid max-w-[1540px] gap-12 px-6 py-16 lg:grid-cols-[1.4fr_2.2fr]">
-          <div>
-            <div className="flex items-center gap-3">
-              <LogoMark />
-              <span className="text-xl font-extrabold">RSCN</span>
-            </div>
-            <p className="mt-5 max-w-[520px] text-lg leading-7 text-[#5f6c80]">
-              Rwanda Supply Chain Network - connecting every product, every
-              business, every movement across the nation.
-            </p>
-            <form className="mt-6 flex max-w-[480px] gap-3">
-              <input
-                aria-label="Newsletter email"
-                placeholder="Newsletter email"
-                className="h-12 min-w-0 flex-1 rounded-lg border border-[#d9e1ea] bg-white px-4 text-lg outline-none"
-              />
+      {/* ── Stats ── */}
+      <section className="border-y border-border bg-muted/40 py-20">
+        <Container>
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+            {stats.map((stat) => (
+              <div key={stat.label} className="space-y-1">
+                <p className="text-3xl font-bold tracking-tight text-foreground">{stat.value}</p>
+                <p className="text-sm text-muted-foreground">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* ── Problem ── */}
+      <section className="py-24">
+        <Container>
+          <SectionHeading eyebrow="The problem" title="Rwanda's supply chain is fragmented." />
+          <div className="mt-16 grid gap-6 md:grid-cols-3">
+            {problems.map((p) => (
+              <Card key={p.title} className="rounded-2xl border bg-card p-6 shadow-sm">
+                <CardHeader className="space-y-4 p-0">
+                  <IconTile icon={AlertTriangle} tone="red" />
+                  <CardTitle className="text-lg font-semibold">{p.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="p-0 pt-3">
+                  <CardDescription className="text-sm leading-7">{p.description}</CardDescription>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* ── How it works ── */}
+      <section className="border-t border-border bg-muted/40 py-24">
+        <Container>
+          <SectionHeading eyebrow="How RSCN works" title="From harvest to shelf, on one network." />
+          <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {workflow.map((item) => (
+              <Card key={item.step} className="relative rounded-2xl border bg-card p-6 shadow-sm">
+                <CardHeader className="space-y-4 p-0">
+                  <span className="absolute right-5 top-5 text-xs font-bold text-muted-foreground">{item.step}</span>
+                  <IconTile icon={item.icon} />
+                  <CardTitle className="text-lg font-semibold">{item.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="p-0 pt-3">
+                  <CardDescription className="text-sm leading-7">{item.description}</CardDescription>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* ── Modules ── */}
+      <section id="modules" className="border-t border-border py-24">
+        <Container>
+          <SectionHeading eyebrow="Platform modules" title="Everything a national supply chain needs." />
+          <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {modules.map((m) => (
+              <Card key={m.title} className="rounded-2xl border bg-card p-6 shadow-sm">
+                <CardHeader className="space-y-4 p-0">
+                  <IconTile icon={m.icon} tone="blue" />
+                  <CardTitle className="text-lg font-semibold">{m.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="p-0 pt-3">
+                  <CardDescription className="text-sm leading-7">{m.description}</CardDescription>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* ── Stakeholders ── */}
+      <section id="industries" className="border-t border-border bg-muted/40 py-24">
+        <Container>
+          <SectionHeading eyebrow="Why RSCN" title="Built for every stakeholder in the chain." />
+          <div className="mt-16 grid gap-6 lg:grid-cols-3">
+            {stakeholders.map((s) => (
+              <Card key={s.title} className="rounded-2xl border bg-card p-6 shadow-sm">
+                <CardHeader className="space-y-4 p-0">
+                  <IconTile icon={s.icon} />
+                  <CardTitle className="text-lg font-semibold">{s.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="p-0 pt-4">
+                  <ul className="space-y-3">
+                    {s.benefits.map((b) => <CheckItem key={b}>{b}</CheckItem>)}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* ── Testimonials ── */}
+      <section className="border-t border-border py-24">
+        <Container>
+          <SectionHeading eyebrow="Testimonials" title="Trusted by cooperatives, exporters and institutions." />
+          <div className="mt-16 grid gap-6 lg:grid-cols-3">
+            {testimonials.map((t) => (
+              <Card key={t.name} className="rounded-2xl border bg-card p-6 shadow-sm">
+                <CardHeader className="p-0">
+                  <div className="flex gap-1 text-amber-400">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-current" />
+                    ))}
+                  </div>
+                </CardHeader>
+                <CardContent className="p-0 pt-4">
+                  <p className="text-sm leading-7 text-foreground">&quot;{t.quote}&quot;</p>
+                </CardContent>
+                <CardFooter className="flex-col items-start gap-0.5 p-0 pt-5">
+                  <p className="text-sm font-semibold text-foreground">{t.name}</p>
+                  <p className="text-xs text-muted-foreground">{t.role}</p>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* ── Partners ── */}
+      <section className="border-t border-border bg-muted/40 py-16">
+        <Container>
+          <p className="text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+            Partners &amp; integrations
+          </p>
+          <div className="mt-10 grid gap-4 sm:grid-cols-3 lg:grid-cols-6">
+            {partners.map((p) => (
+              <div key={p} className="rounded-xl border border-border bg-card px-6 py-4 text-center text-sm font-semibold text-muted-foreground">
+                {p}
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* ── Pricing ── */}
+      <section id="pricing" className="border-t border-border py-24">
+        <Container>
+          <SectionHeading eyebrow="Pricing" title="Simple plans for every stakeholder." />
+          <div className="mt-16 grid gap-6 lg:grid-cols-3">
+            {plans.map((plan) => (
+              <Card
+                key={plan.name}
+                className={`rounded-2xl border bg-card p-6 shadow-sm ${plan.popular ? "border-primary ring-1 ring-primary" : ""}`}
+              >
+                <CardHeader className="space-y-3 p-0">
+                  {plan.popular && (
+                    <span className="inline-flex w-fit rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
+                      Most popular
+                    </span>
+                  )}
+                  <CardTitle className="text-xl font-bold">{plan.name}</CardTitle>
+                  <p className="text-3xl font-bold tracking-tight text-foreground">{plan.price}</p>
+                  <CardDescription className="text-sm">{plan.audience}</CardDescription>
+                </CardHeader>
+                <CardContent className="p-0 pt-6">
+                  <ul className="space-y-3">
+                    {plan.features.map((f) => <CheckItem key={f}>{f}</CheckItem>)}
+                  </ul>
+                </CardContent>
+                <CardFooter className="p-0 pt-8">
+                  <Button
+                    asChild
+                    className="w-full rounded-xl"
+                    variant={plan.popular ? "primary" : "secondary"}
+                  >
+                    <Link href="/register">Get Started</Link>
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section className="border-t border-border bg-muted/40 py-24">
+        <Container>
+          <SectionHeading eyebrow="FAQ" title="Common questions." />
+          <div className="mx-auto mt-14 max-w-3xl overflow-hidden rounded-2xl border border-border bg-card">
+            {faqs.map((q) => (
               <button
-                type="submit"
-                className="rounded-lg bg-[#05662d] px-6 text-lg font-extrabold text-white"
+                key={q}
+                type="button"
+                className="flex w-full items-center justify-between border-b border-border px-6 py-5 text-left text-sm font-semibold text-foreground last:border-b-0 hover:bg-muted/60 transition-colors"
               >
-                Subscribe
+                {q}
+                <Plus className="h-4 w-4 shrink-0 text-muted-foreground" />
               </button>
-            </form>
-          </div>
-          <div className="grid gap-10 sm:grid-cols-3">
-            {footerColumns.map((column) => (
-              <div key={column.title}>
-                <h3 className="text-lg font-extrabold">{column.title}</h3>
-                <ul className="mt-5 space-y-3">
-                  {column.links.map((item) => (
-                    <li key={item}>
-                      <a href="#" className="text-lg text-[#5f6c80]">
-                        {item}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
             ))}
           </div>
-        </div>
-        <div className="border-t border-[#d9e1ea]">
-          <div className="mx-auto flex max-w-[1540px] flex-col gap-4 px-6 py-8 text-base text-[#5f6c80] sm:flex-row sm:items-center sm:justify-between">
+        </Container>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="border-t border-border py-24">
+        <Container>
+          <div className="rounded-3xl bg-primary px-8 py-16 text-center text-primary-foreground sm:px-16">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              Join Rwanda&apos;s national supply chain network.
+            </h2>
+            <p className="mx-auto mt-6 max-w-xl text-lg text-primary-foreground/80">
+              Register your business in minutes. No credit card required to start.
+            </p>
+            <div className="mt-10 flex flex-wrap justify-center gap-4">
+              <Button
+                asChild
+                size="lg"
+                className="rounded-xl bg-card font-semibold text-primary hover:bg-card/90"
+              >
+                <Link href="/register">Register free</Link>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="rounded-xl border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10"
+              >
+                Book a demo
+              </Button>
+              <Button
+                size="lg"
+                variant="ghost"
+                className="rounded-xl text-primary-foreground hover:bg-primary-foreground/10"
+                asChild
+              >
+                <Link href="/contact">Contact sales</Link>
+              </Button>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ── Footer ── */}
+      <footer className="border-t border-border bg-muted/40 py-16">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-[1.4fr_2.2fr]">
+            <div className="space-y-5">
+              <div className="flex items-center gap-3">
+                <LogoMark />
+                <span className="text-base font-bold text-foreground">RSCN</span>
+              </div>
+              <p className="max-w-xs text-sm leading-6 text-muted-foreground">
+                Rwanda Supply Chain Network — connecting every product, every business, every movement across the nation.
+              </p>
+              <form className="flex max-w-sm gap-2">
+                <input
+                  aria-label="Newsletter email"
+                  placeholder="Your email"
+                  className="h-10 min-w-0 flex-1 rounded-lg border border-border bg-card px-3 text-sm text-foreground outline-none placeholder:text-muted-foreground focus:ring-1 focus:ring-primary"
+                />
+                <Button type="submit" size="sm">Subscribe</Button>
+              </form>
+            </div>
+
+            <div className="grid gap-8 sm:grid-cols-3">
+              {footerColumns.map((col) => (
+                <div key={col.title} className="space-y-4">
+                  <h3 className="text-sm font-semibold text-foreground">{col.title}</h3>
+                  <ul className="space-y-3">
+                    {col.links.map((item) => (
+                      <li key={item}>
+                        <a href="#" className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+                          {item}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-12 flex flex-col gap-3 border-t border-border pt-8 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
             <span>&copy; 2026 Rwanda Supply Chain Network. All rights reserved.</span>
             <span>Kigali, Rwanda</span>
           </div>
-        </div>
+        </Container>
       </footer>
+
     </main>
   );
 }

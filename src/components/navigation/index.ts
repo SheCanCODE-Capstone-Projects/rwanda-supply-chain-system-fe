@@ -5,3 +5,4 @@ export * from "./user-menu";
 export * from "./notification-menu";
 export * from "./theme-toggle";
 export * from "./language-switcher";
+export * from "./navigation-menu";

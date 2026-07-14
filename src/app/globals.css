@@ -2,3 +2,39 @@
 @import "../styles/variables.css";
 @import "../styles/animations.css";
 @import "../styles/globals.css";
+
+@theme inline {
+  /* Colors mapped to CSS variables */
+  --color-background:          var(--background);
+  --color-foreground:          var(--text);
+
+  --color-primary:             var(--primary);
+  --color-primary-foreground:  #ffffff;
+
+  --color-secondary:           var(--secondary);
+  --color-secondary-foreground:#ffffff;
+
+  --color-muted:               var(--surface);
+  --color-muted-foreground:    var(--text-secondary);
+
+  --color-card:                var(--background);
+  --color-card-foreground:     var(--text);
+
+  --color-border:              var(--border);
+
+  --color-destructive:         var(--danger);
+  --color-destructive-foreground: #ffffff;
+
+  --color-accent:              var(--accent);
+  --color-accent-foreground:   #111827;
+
+  --color-success:             var(--success);
+  --color-warning:             var(--warning);
+  --color-info:                var(--info);
+
+  /* Border radius */
+  --radius-sm:  var(--radius-sm);
+  --radius:     var(--radius);
+  --radius-lg:  var(--radius-lg);
+  --radius-xl:  var(--radius-xl);
+}
