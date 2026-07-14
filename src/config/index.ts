@@ -1,6 +1,7 @@
 export * from "./colors";
 export * from "./icons";
 export * from "./navigation";
+export * from "./permissions";
 export * from "./radius";
 export * from "./shadows";
 export * from "./site";
