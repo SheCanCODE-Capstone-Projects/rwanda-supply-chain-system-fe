@@ -45,11 +45,11 @@ export default function RegisterPage() {
 
       {/* Sign-in link — shown on role selection only */}
       {view === "role-selection" && (
-        <p className="mt-6 text-center text-sm text-[--text-secondary]">
+        <p className="mt-6 text-center text-sm text-(--text-secondary)">
           Already have an account?{" "}
           <Link
             href={ROUTES.LOGIN}
-            className="font-medium text-[--primary] hover:underline"
+            className="font-medium text-(--primary) hover:underline"
           >
             Sign in
           </Link>
