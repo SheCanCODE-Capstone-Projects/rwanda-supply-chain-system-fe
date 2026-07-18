@@ -18,7 +18,23 @@ export async function apiFetch<T>(
   });
 
   if (!response.ok) {
-    throw new Error(`Request failed with status ${response.status}`);
+    // Try to extract a message from the response body first
+    let message = `Request failed with status ${response.status}`;
+    try {
+      const body = await response.json();
+      if (typeof body?.message === "string") message = body.message;
+      else if (typeof body?.error === "string") message = body.error;
+    } catch {
+      // Body wasn't JSON — keep the default message
+    }
+
+    // Give developers a clear hint when the backend is unreachable
+    if (response.status === 404 && !API_CONFIG.baseUrl) {
+      message =
+        "Backend URL is not configured. Set NEXT_PUBLIC_API_URL in .env.local.";
+    }
+
+    throw new Error(message);
   }
 
   if (response.status === 204) {
