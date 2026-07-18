@@ -71,7 +71,10 @@ export function middleware(request: NextRequest) {
   // 2. Not authenticated → block protected routes
   if (!isAuthenticated && isProtectedRoute) {
     const loginUrl = new URL("/login", request.url);
-    loginUrl.searchParams.set("next", pathname);
+    const nextPath = request.nextUrl.search
+      ? `${pathname}${request.nextUrl.search}`
+      : pathname;
+    loginUrl.searchParams.set("next", nextPath);
     return NextResponse.redirect(loginUrl);
   }
 
