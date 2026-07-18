@@ -37,7 +37,9 @@ export function getStoredToken(): string | null {
 export function storeToken(token: string): void {
   if (typeof window === "undefined") return;
   window.localStorage.setItem(TOKEN_KEY, token);
-  setCookie(TOKEN_KEY, token, COOKIE_MAX_AGE);
+  // The cookie is a presence indicator only — store a dummy value so the
+  // actual token is never exposed in a non-HttpOnly cookie.
+  setCookie(TOKEN_KEY, "true", COOKIE_MAX_AGE);
 }
 
 export function clearStoredToken(): void {

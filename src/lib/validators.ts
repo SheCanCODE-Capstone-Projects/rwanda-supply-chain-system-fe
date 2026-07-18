@@ -38,7 +38,8 @@ export const contactInformationSchema = z.object({
   contactEmail: emailSchema,
   phone: z
     .string()
-    .min(7, "Phone number is required")
+    .min(1, "Phone number is required")
+    .min(7, "Phone number must be at least 7 digits")
     .regex(/^[+\d\s\-()]+$/, "Enter a valid phone number"),
   website: z
     .string()
