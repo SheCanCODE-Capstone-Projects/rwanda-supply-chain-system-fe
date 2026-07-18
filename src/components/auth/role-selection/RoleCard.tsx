@@ -17,10 +17,10 @@ export function RoleCard({
       onClick={() => onSelect(role)}
       className={cn(
         "group relative flex w-full flex-col items-start gap-3 rounded-2xl border-2 p-5 text-left transition-all duration-200",
-        "hover:border-[--primary] hover:bg-[--primary-light] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[--primary]",
+        "hover:border-(--primary) hover:bg-(--primary-light) focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--primary)",
         selected
-          ? "border-[--primary] bg-[--primary-light] shadow-md"
-          : "border-[--border] bg-white",
+          ? "border-(--primary) bg-(--primary-light) shadow-md"
+          : "border-(--border) bg-white",
       )}
       aria-pressed={selected}
     >
@@ -29,8 +29,8 @@ export function RoleCard({
         className={cn(
           "absolute right-4 top-4 flex h-5 w-5 items-center justify-center rounded-full border-2 transition-all duration-200",
           selected
-            ? "border-[--primary] bg-[--primary]"
-            : "border-[--border] bg-white",
+            ? "border-(--primary) bg-(--primary)"
+            : "border-(--border) bg-white",
         )}
         aria-hidden="true"
       >
@@ -57,8 +57,8 @@ export function RoleCard({
         className={cn(
           "flex h-12 w-12 items-center justify-center rounded-xl transition-colors duration-200",
           selected
-            ? "bg-[--primary] text-white"
-            : "bg-[--surface] text-[--primary] group-hover:bg-[--primary] group-hover:text-white",
+            ? "bg-(--primary) text-white"
+            : "bg-(--surface) text-(--primary) group-hover:bg-(--primary) group-hover:text-white",
         )}
       >
         {icon}
@@ -69,12 +69,12 @@ export function RoleCard({
         <p
           className={cn(
             "text-sm font-semibold transition-colors duration-200",
-            selected ? "text-[--primary]" : "text-[--text]",
+            selected ? "text-(--primary)" : "text-(--text)",
           )}
         >
           {label}
         </p>
-        <p className="mt-0.5 text-xs leading-relaxed text-[--text-secondary]">
+        <p className="mt-0.5 text-xs leading-relaxed text-(--text-secondary)">
           {description}
         </p>
       </div>
