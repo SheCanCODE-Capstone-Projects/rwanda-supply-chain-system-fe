@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
@@ -27,7 +27,7 @@ const ROLE_DASHBOARD: Record<UserRole, string> = {
 const OTP_LENGTH = 6;
 const RESEND_COOLDOWN = 60;
 
-export default function VerifyOtpPage() {
+function VerifyOtpContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get("email") ?? "";
@@ -124,14 +124,14 @@ export default function VerifyOtpPage() {
   return (
     <div className="animate-fade-in-scale space-y-8">
       <div className="space-y-1">
-        <p className="text-xs font-semibold uppercase tracking-widest text-[--primary]">
+        <p className="text-xs font-semibold uppercase tracking-widest text-(--primary)">
           Verification
         </p>
-        <h1 className="text-2xl font-semibold text-[--text]">Enter your code</h1>
-        <p className="text-sm text-[--text-secondary]">
+        <h1 className="text-2xl font-semibold text-(--text)">Enter your code</h1>
+        <p className="text-sm text-(--text-secondary)">
           We sent a 6-digit code to{" "}
           {email ? (
-            <span className="font-medium text-[--text]">{email}</span>
+            <span className="font-medium text-(--text)">{email}</span>
           ) : (
             "your email"
           )}
@@ -159,7 +159,7 @@ export default function VerifyOtpPage() {
             onKeyDown={(e) => handleKeyDown(i, e)}
             aria-label={`Digit ${i + 1}`}
             disabled={loading}
-            className="h-14 w-12 rounded-xl border-2 border-[--border] bg-white text-center text-xl font-semibold text-[--text] transition-colors focus:border-[--primary] focus:outline-none focus:ring-2 focus:ring-[--primary]/20 disabled:opacity-50"
+            className="h-14 w-12 rounded-xl border-2 border-(--border) bg-white text-center text-xl font-semibold text-(--text) transition-colors focus:border-(--primary) focus:outline-none focus:ring-2 focus:ring-(--primary)/20 disabled:opacity-50"
           />
         ))}
       </div>
@@ -167,7 +167,7 @@ export default function VerifyOtpPage() {
       {apiError && (
         <div
           role="alert"
-          className="rounded-xl border border-[--danger] bg-[--danger-bg] px-4 py-3 text-sm text-[--danger]"
+          className="rounded-xl border border-(--danger) bg-(--danger-bg) px-4 py-3 text-sm text-(--danger)"
         >
           {apiError}
         </div>
@@ -185,21 +185,29 @@ export default function VerifyOtpPage() {
         Verify
       </Button>
 
-      <p className="text-center text-sm text-[--text-secondary]">
+      <p className="text-center text-sm text-(--text-secondary)">
         Didn&apos;t receive a code?{" "}
         {cooldown > 0 ? (
-          <span className="text-[--text-muted]">Resend in {cooldown}s</span>
+          <span className="text-(--text-muted)">Resend in {cooldown}s</span>
         ) : (
           <button
             type="button"
             onClick={handleResend}
             disabled={resending}
-            className="font-medium text-[--primary] hover:underline disabled:opacity-50"
+            className="font-medium text-(--primary) hover:underline disabled:opacity-50"
           >
             {resending ? "Sending…" : "Resend code"}
           </button>
         )}
       </p>
     </div>
+  );
+}
+
+export default function VerifyOtpPage() {
+  return (
+    <Suspense>
+      <VerifyOtpContent />
+    </Suspense>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
@@ -11,7 +11,7 @@ import { ROUTES } from "@/constants/routes";
 
 type Status = "verifying" | "success" | "error" | "no-token";
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token") ?? "";
 
@@ -40,7 +40,7 @@ export default function VerifyEmailPage() {
     return (
       <div className="animate-fade-in flex flex-col items-center gap-4 py-8">
         <Spinner />
-        <p className="text-sm text-[--text-secondary]">Verifying your email…</p>
+        <p className="text-sm text-(--text-secondary)">Verifying your email…</p>
       </div>
     );
   }
@@ -48,9 +48,9 @@ export default function VerifyEmailPage() {
   if (status === "success") {
     return (
       <div className="animate-fade-in-scale space-y-6 text-center">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[--success-bg]">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-(--success-bg)">
           <svg
-            className="h-8 w-8 text-[--success]"
+            className="h-8 w-8 text-(--success)"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -61,16 +61,14 @@ export default function VerifyEmailPage() {
           </svg>
         </div>
         <div className="space-y-1">
-          <h1 className="text-2xl font-semibold text-[--text]">Email verified</h1>
-          <p className="text-sm text-[--text-secondary]">
+          <h1 className="text-2xl font-semibold text-(--text)">Email verified</h1>
+          <p className="text-sm text-(--text-secondary)">
             Your email address has been confirmed. You can now sign in.
           </p>
         </div>
-        <Link href={ROUTES.LOGIN}>
-          <Button variant="primary" size="lg" className="w-full">
-            Sign in
-          </Button>
-        </Link>
+        <Button asChild variant="primary" size="lg" className="w-full">
+          <Link href={ROUTES.LOGIN}>Sign in</Link>
+        </Button>
       </div>
     );
   }
@@ -78,9 +76,9 @@ export default function VerifyEmailPage() {
   if (status === "error") {
     return (
       <div className="animate-fade-in-scale space-y-6 text-center">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[--danger-bg]">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-(--danger-bg)">
           <svg
-            className="h-8 w-8 text-[--danger]"
+            className="h-8 w-8 text-(--danger)"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -95,16 +93,14 @@ export default function VerifyEmailPage() {
           </svg>
         </div>
         <div className="space-y-1">
-          <h1 className="text-2xl font-semibold text-[--text]">Verification failed</h1>
-          <p className="text-sm text-[--text-secondary]">
+          <h1 className="text-2xl font-semibold text-(--text)">Verification failed</h1>
+          <p className="text-sm text-(--text-secondary)">
             The link may have expired or already been used. Please register again or contact support.
           </p>
         </div>
-        <Link href={ROUTES.REGISTER}>
-          <Button variant="outline" size="lg" className="w-full">
-            Back to registration
-          </Button>
-        </Link>
+        <Button asChild variant="outline" size="lg" className="w-full">
+          <Link href={ROUTES.REGISTER}>Back to registration</Link>
+        </Button>
       </div>
     );
   }
@@ -113,18 +109,26 @@ export default function VerifyEmailPage() {
   return (
     <div className="animate-fade-in-scale space-y-6 text-center">
       <div className="space-y-1">
-        <h1 className="text-2xl font-semibold text-[--text]">Check your inbox</h1>
-        <p className="text-sm text-[--text-secondary]">
+        <h1 className="text-2xl font-semibold text-(--text)">Check your inbox</h1>
+        <p className="text-sm text-(--text-secondary)">
           We&apos;ve sent a verification link to your email address. Click the link to
           activate your account.
         </p>
       </div>
-      <p className="text-sm text-[--text-secondary]">
+      <p className="text-sm text-(--text-secondary)">
         Already verified?{" "}
-        <Link href={ROUTES.LOGIN} className="font-medium text-[--primary] hover:underline">
+        <Link href={ROUTES.LOGIN} className="font-medium text-(--primary) hover:underline">
           Sign in
         </Link>
       </p>
     </div>
+  );
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense>
+      <VerifyEmailContent />
+    </Suspense>
   );
 }
