@@ -46,9 +46,9 @@ export default function ForgotPasswordPage() {
     return (
       <div className="animate-fade-in-scale space-y-6 text-center">
         {/* Icon */}
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[--primary-light]">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-(--primary-light)">
           <svg
-            className="h-8 w-8 text-[--primary]"
+            className="h-8 w-8 text-(--primary)"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -64,20 +64,20 @@ export default function ForgotPasswordPage() {
         </div>
 
         <div className="space-y-1">
-          <h1 className="text-2xl font-semibold text-[--text]">Check your inbox</h1>
-          <p className="text-sm text-[--text-secondary]">
+          <h1 className="text-2xl font-semibold text-(--text)">Check your inbox</h1>
+          <p className="text-sm text-(--text-secondary)">
             We sent a password reset link to{" "}
-            <span className="font-medium text-[--text]">{getValues("email")}</span>.
+            <span className="font-medium text-(--text)">{getValues("email")}</span>.
             It may take a minute to arrive.
           </p>
         </div>
 
-        <p className="text-sm text-[--text-secondary]">
+        <p className="text-sm text-(--text-secondary)">
           Didn&apos;t receive it?{" "}
           <button
             type="button"
             onClick={() => setSubmitted(false)}
-            className="font-medium text-[--primary] hover:underline"
+            className="font-medium text-(--primary) hover:underline"
           >
             Try again
           </button>
@@ -85,7 +85,7 @@ export default function ForgotPasswordPage() {
 
         <Link
           href={ROUTES.LOGIN}
-          className="block text-sm font-medium text-[--text-secondary] hover:text-[--text]"
+          className="block text-sm font-medium text-(--text-secondary) hover:text-(--text)"
         >
           ← Back to sign in
         </Link>
@@ -96,11 +96,11 @@ export default function ForgotPasswordPage() {
   return (
     <div className="animate-fade-in-scale space-y-6">
       <div className="space-y-1">
-        <p className="text-xs font-semibold uppercase tracking-widest text-[--primary]">
+        <p className="text-xs font-semibold uppercase tracking-widest text-(--primary)">
           Account recovery
         </p>
-        <h1 className="text-2xl font-semibold text-[--text]">Forgot password?</h1>
-        <p className="text-sm text-[--text-secondary]">
+        <h1 className="text-2xl font-semibold text-(--text)">Forgot password?</h1>
+        <p className="text-sm text-(--text-secondary)">
           Enter your email address and we&apos;ll send you a link to reset your password.
         </p>
       </div>
@@ -117,7 +117,7 @@ export default function ForgotPasswordPage() {
         {apiError && (
           <div
             role="alert"
-            className="rounded-xl border border-[--danger] bg-[--danger-bg] px-4 py-3 text-sm text-[--danger]"
+            className="rounded-xl border border-(--danger) bg-(--danger-bg) px-4 py-3 text-sm text-(--danger)"
           >
             {apiError}
           </div>
@@ -134,11 +134,11 @@ export default function ForgotPasswordPage() {
         </Button>
       </form>
 
-      <p className="text-center text-sm text-[--text-secondary]">
+      <p className="text-center text-sm text-(--text-secondary)">
         Remembered it?{" "}
         <Link
           href={ROUTES.LOGIN}
-          className="font-medium text-[--primary] hover:underline"
+          className="font-medium text-(--primary) hover:underline"
         >
           Sign in
         </Link>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -12,7 +12,7 @@ import { authService } from "@/services/auth.service";
 import { ROUTES } from "@/constants/routes";
 import { resetPasswordSchema, type ResetPasswordValues } from "@/lib/validators";
 
-export default function ResetPasswordPage() {
+function ResetPasswordContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token") ?? "";
@@ -32,9 +32,9 @@ export default function ResetPasswordPage() {
   if (!token) {
     return (
       <div className="animate-fade-in-scale space-y-4 text-center">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[--danger-bg]">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-(--danger-bg)">
           <svg
-            className="h-8 w-8 text-[--danger]"
+            className="h-8 w-8 text-(--danger)"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -48,13 +48,13 @@ export default function ResetPasswordPage() {
             />
           </svg>
         </div>
-        <h1 className="text-2xl font-semibold text-[--text]">Invalid link</h1>
-        <p className="text-sm text-[--text-secondary]">
+        <h1 className="text-2xl font-semibold text-(--text)">Invalid link</h1>
+        <p className="text-sm text-(--text-secondary)">
           This password reset link is missing or invalid. Please request a new one.
         </p>
         <Link
           href={ROUTES.FORGOT_PASSWORD}
-          className="inline-block text-sm font-medium text-[--primary] hover:underline"
+          className="inline-block text-sm font-medium text-(--primary) hover:underline"
         >
           Request a new link
         </Link>
@@ -65,9 +65,9 @@ export default function ResetPasswordPage() {
   if (success) {
     return (
       <div className="animate-fade-in-scale space-y-6 text-center">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[--success-bg]">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-(--success-bg)">
           <svg
-            className="h-8 w-8 text-[--success]"
+            className="h-8 w-8 text-(--success)"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -78,8 +78,8 @@ export default function ResetPasswordPage() {
           </svg>
         </div>
         <div className="space-y-1">
-          <h1 className="text-2xl font-semibold text-[--text]">Password updated</h1>
-          <p className="text-sm text-[--text-secondary]">
+          <h1 className="text-2xl font-semibold text-(--text)">Password updated</h1>
+          <p className="text-sm text-(--text-secondary)">
             Your password has been changed successfully. You can now sign in with your new password.
           </p>
         </div>
@@ -115,11 +115,11 @@ export default function ResetPasswordPage() {
   return (
     <div className="animate-fade-in-scale space-y-6">
       <div className="space-y-1">
-        <p className="text-xs font-semibold uppercase tracking-widest text-[--primary]">
+        <p className="text-xs font-semibold uppercase tracking-widest text-(--primary)">
           Account recovery
         </p>
-        <h1 className="text-2xl font-semibold text-[--text]">Set new password</h1>
-        <p className="text-sm text-[--text-secondary]">
+        <h1 className="text-2xl font-semibold text-(--text)">Set new password</h1>
+        <p className="text-sm text-(--text-secondary)">
           Choose a strong password — at least 8 characters.
         </p>
       </div>
@@ -143,7 +143,7 @@ export default function ResetPasswordPage() {
         {apiError && (
           <div
             role="alert"
-            className="rounded-xl border border-[--danger] bg-[--danger-bg] px-4 py-3 text-sm text-[--danger]"
+            className="rounded-xl border border-(--danger) bg-(--danger-bg) px-4 py-3 text-sm text-(--danger)"
           >
             {apiError}
           </div>
@@ -160,5 +160,13 @@ export default function ResetPasswordPage() {
         </Button>
       </form>
     </div>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense>
+      <ResetPasswordContent />
+    </Suspense>
   );
 }
