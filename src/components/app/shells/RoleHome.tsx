@@ -1,11 +1,11 @@
 "use client";
-import { ReactElement } from "react";
+import type { ComponentType, ReactElement, SVGProps } from "react";
 import {
   AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, LineChart, Line,
   XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend,
 } from "recharts";
 import {
-  ArrowUpRight, ArrowDownRight, type LucideIcon,
+  ArrowUpRight, ArrowDownRight,
   Users, ShieldCheck, Activity, Server, Landmark, Warehouse, Truck, Store,
   Package, Sprout, ShoppingCart, CreditCard, Boxes, Factory, ClipboardList,
   BarChart3, FileSignature, PackageCheck, Heart, MapPin, Star, CircleDollarSign,
@@ -18,7 +18,9 @@ import { useRouter } from "next/navigation";
 
 export type Kpi = { label: string; value: string; delta?: string; up?: boolean; icon: string };
 
-const KPI_ICONS: Record<string, LucideIcon> = {
+type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
+
+const KPI_ICONS: Record<string, IconComponent> = {
   Users, ShieldCheck, Activity, Server, Landmark, Warehouse, Truck, Store,
   Package, Sprout, ShoppingCart, CreditCard, Boxes, Factory, ClipboardList,
   BarChart3, FileSignature, PackageCheck, Heart, MapPin, Star, CircleDollarSign,

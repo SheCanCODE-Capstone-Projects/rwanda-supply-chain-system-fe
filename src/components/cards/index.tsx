@@ -1,12 +1,14 @@
-import { ReactNode, type ComponentType } from "react";
-import { ArrowUpRight, ArrowDownRight, type LucideIcon } from "lucide-react";
+import { ReactNode, type ComponentType, type SVGProps } from "react";
+import { ArrowUpRight, ArrowDownRight } from "lucide-react";
 import { cn } from "@/utils";
 import { Card, CardBody } from "@/components/ui";
+
+type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
 // ─── StatCard ─────────────────────────────────────────────────────────────────
 export function StatCard({ label, value, delta, up, icon: Icon, accent = "#166534" }: {
   label: string; value: string; delta?: string; up?: boolean;
-  icon: LucideIcon; accent?: string;
+  icon: IconComponent; accent?: string;
 }) {
   return (
     <Card>
@@ -97,7 +99,7 @@ export function ActivityCard({ items }: {
 
 // ─── QuickActionCard ──────────────────────────────────────────────────────────
 export function QuickActionCard({ label, icon: Icon, onClick }: {
-  label: string; icon: LucideIcon; onClick: () => void;
+  label: string; icon: IconComponent; onClick: () => void;
 }) {
   return (
     <button onClick={onClick}

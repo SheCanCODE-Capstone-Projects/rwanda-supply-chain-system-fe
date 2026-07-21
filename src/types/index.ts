@@ -1,4 +1,6 @@
-import type { LucideIcon } from "lucide-react";
+import type { ComponentType, SVGProps } from "react";
+
+type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
 // ─── Auth & Roles ─────────────────────────────────────────────────────────────
 export type Role =
@@ -58,8 +60,8 @@ export type EntityStatus = "Active" | "Inactive" | "Pending" | "Suspended";
 export type OrderStatus = "Pending" | "Confirmed" | "In Transit" | "Delivered" | "Cancelled";
 export type DriverStatus = "Available" | "On Trip" | "Off Duty";
 
-export type NavItem = { slug: string; label: string; icon: LucideIcon; perm?: string };
-export type QuickAction = { label: string; slug: string; icon: LucideIcon };
+export type NavItem = { slug: string; label: string; icon: IconComponent; perm?: string };
+export type QuickAction = { label: string; slug: string; icon: IconComponent };
 
 export type SelectOption = { value: string; label: string };
 

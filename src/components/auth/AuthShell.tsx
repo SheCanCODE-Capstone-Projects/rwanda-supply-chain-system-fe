@@ -28,7 +28,7 @@ export function AuthShell({
             ))}
           </div>
         </div>
-        <p className="text-xs text-primary-foreground/70">© {new Date().getFullYear()} Rwanda Supply Chain Network</p>
+        <p className="text-xs text-primary-foreground/70">&copy; {new Date().getFullYear()} Rwanda Supply Chain Network</p>
       </div>
       <div className="flex flex-col p-6 md:p-10">
         <div className="flex items-center justify-between">

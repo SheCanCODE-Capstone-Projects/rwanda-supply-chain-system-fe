@@ -50,7 +50,7 @@ export function ConfirmModal({ open, onClose, onConfirm, title, message, loading
         <div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-warning/10 text-warning">
           <AlertTriangle className="h-6 w-6" />
         </div>
-        <h3 className="font-semibold">{title}</h3>
+        <h3 className="font-semibold">{title} </h3>
         <p className="mt-2 text-sm text-muted-foreground">{message}</p>
         <div className="mt-5 flex gap-2">
           <Button variant="outline" fullWidth onClick={onClose}>{t("form.cancel")}</Button>

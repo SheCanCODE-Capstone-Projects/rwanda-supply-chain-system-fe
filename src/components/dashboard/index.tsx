@@ -1,15 +1,16 @@
 "use client";
-import { ReactElement } from "react";
+import type { ComponentType, ReactElement, SVGProps } from "react";
 import {
   AreaChart, Area, BarChart, Bar, LineChart, Line, PieChart, Pie, Cell,
   XAxis, YAxis, Tooltip, CartesianGrid, Legend, ResponsiveContainer,
 } from "recharts";
-import { type LucideIcon } from "lucide-react";
 import { StatCard, ActivityCard, SummaryCard } from "@/components/cards";
 import { Card, CardBody } from "@/components/ui";
 
 // ─── DashboardStats ───────────────────────────────────────────────────────────
-export type KpiItem = { label: string; value: string; delta?: string; up?: boolean; icon: LucideIcon };
+type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
+
+export type KpiItem = { label: string; value: string; delta?: string; up?: boolean; icon: IconComponent };
 
 export function DashboardStats({ kpis, accent }: { kpis: KpiItem[]; accent?: string }) {
   return (
