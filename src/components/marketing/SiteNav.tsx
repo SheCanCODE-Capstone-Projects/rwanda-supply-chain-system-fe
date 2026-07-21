@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import { useState } from "react";
 
@@ -11,6 +12,8 @@ const NAV = [
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
       <div className="container-rscn flex h-16 items-center justify-between gap-4">
@@ -24,7 +27,11 @@ export function SiteNav() {
             <Link
               key={n.to}
               href={n.to}
-              className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-surface hover:text-foreground"
+              className={`rounded-md px-3 py-2 text-sm font-medium ${
+                pathname === n.to
+                  ? "bg-primary/10 text-primary"
+                  : "text-muted-foreground hover:bg-surface hover:text-foreground"
+              }`}
             >
               {n.label}
             </Link>
@@ -42,7 +49,16 @@ export function SiteNav() {
         <div className="lg:hidden border-t border-border bg-background">
           <div className="container-rscn flex flex-col py-2">
             {NAV.map((n) => (
-              <Link key={n.to} href={n.to} onClick={() => setOpen(false)} className="rounded-md px-3 py-2 text-sm hover:bg-surface">{n.label}</Link>
+              <Link
+                key={n.to}
+                href={n.to}
+                onClick={() => setOpen(false)}
+                className={`rounded-md px-3 py-2 text-sm ${
+                  pathname === n.to ? "bg-primary/10 text-primary" : "hover:bg-surface"
+                }`}
+              >
+                {n.label}
+              </Link>
             ))}
             <div className="mt-2 flex gap-2 border-t border-border pt-2">
               <Link href="/auth/login" onClick={() => setOpen(false)} className="flex-1 h-9 grid place-items-center rounded-lg border border-border text-sm">Login</Link>

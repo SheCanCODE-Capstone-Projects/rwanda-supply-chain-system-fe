@@ -1,6 +1,7 @@
+import type { ComponentType, SVGProps } from "react";
 import {
   Shield, Landmark, Sprout, Users, Factory, Package, ShoppingCart, Store,
-  Warehouse, Truck, User as UserIcon, Banknote, type LucideIcon,
+  Warehouse, Truck, User as UserIcon, Banknote,
 } from "lucide-react";
 
 export type Role =
@@ -13,7 +14,7 @@ export const ALL_ROLES: Role[] = [
 ];
 
 export type RoleMeta = {
-  label: string; short: string; icon: LucideIcon;
+  label: string; short: string; icon: ComponentType<SVGProps<SVGSVGElement>>;
   home: string; orgType: string; accent: string; description: string;
 };
 
