@@ -1,68 +1,67 @@
 import { NextRequest, NextResponse } from "next/server";
+import { ROLE_DASHBOARDS, requiresProfileSetupForRole } from "@/lib/auth/onboarding";
+import { SESSION_COOKIE, readSignedCookie, type AuthSessionCookie } from "@/lib/auth/session-cookie";
 
 const ROLE_PREFIXES: Record<string, string> = {
-  "/admin":        "super_admin",
-  "/government":   "government",
-  "/farmer":       "farmer",
-  "/cooperative":  "cooperative",
+  "/admin": "super_admin",
+  "/government": "government",
+  "/farmer": "farmer",
+  "/cooperative": "cooperative",
   "/manufacturer": "manufacturer",
-  "/supplier":     "supplier",
-  "/buyer":        "buyer",
-  "/retailer":     "retailer",
-  "/warehouse":    "warehouse",
-  "/transport":    "transport",
-  "/driver":       "driver",
-  "/bank":         "bank",
+  "/supplier": "supplier",
+  "/buyer": "buyer",
+  "/retailer": "retailer",
+  "/warehouse": "warehouse",
+  "/transport": "transport",
+  "/driver": "driver",
+  "/bank": "bank",
 };
 
-const ROLE_HOME: Record<string, string> = {
-  super_admin:  "/admin/dashboard",
-  government:   "/government/dashboard",
-  farmer:       "/farmer/dashboard",
-  cooperative:  "/cooperative/dashboard",
-  manufacturer: "/manufacturer/dashboard",
-  supplier:     "/supplier/dashboard",
-  buyer:        "/buyer/dashboard",
-  retailer:     "/retailer/dashboard",
-  warehouse:    "/warehouse/dashboard",
-  transport:    "/transport/dashboard",
-  driver:       "/driver/dashboard",
-  bank:         "/bank/dashboard",
-};
-
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+  const session = await readSignedCookie<AuthSessionCookie>(req.cookies.get(SESSION_COOKIE)?.value);
+  const profileCompleted = session?.profileCompleted ?? session?.profileComplete ?? false;
 
-  // Determine which role prefix this path belongs to
-  const prefix = Object.keys(ROLE_PREFIXES).find((p) => pathname.startsWith(p));
+  if (pathname === "/auth/profile-setup") {
+    if (!session) {
+      const url = req.nextUrl.clone();
+      url.pathname = "/auth/login";
+      url.searchParams.set("redirect", pathname);
+      return NextResponse.redirect(url);
+    }
+
+    if (profileCompleted) {
+      const url = req.nextUrl.clone();
+      url.pathname = ROLE_DASHBOARDS[session.claims.role] ?? "/buyer/dashboard";
+      url.searchParams.set("redirect", pathname);
+      return NextResponse.redirect(url);
+    }
+
+    return NextResponse.next();
+  }
+
+  const prefix = Object.keys(ROLE_PREFIXES).find((item) => pathname.startsWith(item));
   if (!prefix) return NextResponse.next();
 
   const requiredRole = ROLE_PREFIXES[prefix];
-
-  // Read session from cookie (set by login)
-  const sessionRaw = req.cookies.get("rscn.session")?.value;
-
-  if (!sessionRaw) {
+  if (!session) {
     const url = req.nextUrl.clone();
     url.pathname = "/auth/login";
     url.searchParams.set("redirect", pathname);
     return NextResponse.redirect(url);
   }
 
-  try {
-    const session = JSON.parse(sessionRaw);
-    const userRole = session?.claims?.role;
-
-    if (userRole !== requiredRole) {
-      const url = req.nextUrl.clone();
-      url.pathname = "/forbidden";
-      url.searchParams.set("from", pathname);
-      url.searchParams.set("required", requiredRole);
-      return NextResponse.redirect(url);
-    }
-  } catch {
+  if (session.claims.role !== requiredRole) {
     const url = req.nextUrl.clone();
-    url.pathname = "/auth/login";
+    url.pathname = "/forbidden";
+    url.searchParams.set("from", pathname);
+    url.searchParams.set("required", requiredRole);
+    return NextResponse.redirect(url);
+  }
+
+  if (requiresProfileSetupForRole(session.claims.role, profileCompleted)) {
+    const url = req.nextUrl.clone();
+    url.pathname = "/auth/profile-setup";
     url.searchParams.set("redirect", pathname);
     return NextResponse.redirect(url);
   }
@@ -84,5 +83,6 @@ export const config = {
     "/transport/:path*",
     "/driver/:path*",
     "/bank/:path*",
+    "/auth/profile-setup",
   ],
 };
