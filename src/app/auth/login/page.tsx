@@ -1,30 +1,47 @@
-"use client";
+﻿"use client";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { AuthShell, Field, inputCls, primaryBtn } from "@/components/auth/AuthShell";
 import { GoogleButton } from "@/components/auth/GoogleButton";
-import { ALL_ROLES, ROLE_META, Role, roleDashboard } from "@/lib/auth/roles";
-import { signInAs } from "@/lib/auth/session";
+import { beginGoogleAuth, signInWithCredentials } from "@/lib/auth/session";
+import { ROLE_DASHBOARDS } from "@/lib/auth/onboarding";
 import { useT } from "@/lib/i18n";
 
 export default function LoginPage() {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
   const router = useRouter();
-  const [role, setRole] = useState<Role>("farmer");
+  const t = useT();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [remember, setRemember] = useState(false);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
-  const t = useT();
 
-  async function handleSignIn(e?: React.FormEvent) {
-    e?.preventDefault();
-    setBusy(true); setErr(null);
+  async function handleSubmit(event: React.FormEvent) {
+    event.preventDefault();
+    setBusy(true);
+    setErr(null);
     try {
-      await signInAs(role);
-      router.push(redirect ?? roleDashboard(role));
-    } catch (e: unknown) {
-      setErr(e instanceof Error ? e.message : t("auth.login.error"));
+      const result = await signInWithCredentials({ email, password, remember });
+      const target = redirect && redirect !== "/auth/profile-setup" ? redirect : ROLE_DASHBOARDS[result.session.claims.role];
+      router.push(target);
+    } catch (error) {
+      setErr(error instanceof Error ? error.message : t("auth.login.error"));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function handleGoogle() {
+    setBusy(true);
+    setErr(null);
+    try {
+      const result = await beginGoogleAuth({ intent: "login" });
+      if (result.authUrl) window.location.href = result.authUrl;
+    } catch (error) {
+      setErr(error instanceof Error ? error.message : t("auth.google.notConfigured"));
     } finally {
       setBusy(false);
     }
@@ -34,60 +51,32 @@ export default function LoginPage() {
     <AuthShell
       title={t("auth.login.title")}
       description={t("auth.login.description")}
-      footer={<> {t("auth.login.footer.prompt")} <Link href="/auth/register" className="font-medium text-primary hover:underline">{t("auth.login.footer.link")}</Link></>}
+      footer={<>{t("auth.login.footer.prompt")} <Link href="/auth/register" className="font-medium text-primary hover:underline">{t("auth.login.footer.link")}</Link></>}
     >
       <div className="space-y-4">
-        <GoogleButton to="/auth/choose-role" />
-        <div className="flex items-center gap-3 text-xs text-muted-foreground">
-          <div className="h-px flex-1 bg-border" />
-          <span>{t("auth.login.or")}</span>
-          <div className="h-px flex-1 bg-border" />
+        <div className="rounded-lg border border-amber-500/20 bg-amber-500/10 p-3 text-xs text-amber-700 dark:text-amber-400">
+          <p className="font-medium">Development access</p>
+          <p className="mt-1">Use any password and an email like farmer@rscn.local, cooperative@rscn.local, manufacturer@rscn.local, supplier@rscn.local, buyer@rscn.local, retailer@rscn.local, warehouse@rscn.local, transport@rscn.local, driver@rscn.local, government@rscn.local, bank@rscn.local, or admin@rscn.local.</p>
         </div>
-        <form className="space-y-4" onSubmit={handleSignIn}>
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <Field label={t("auth.login.email")}>
-            <input type="text" defaultValue={`${role}@rscn.rw`} className={inputCls} autoComplete="username" />
+            <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} className={inputCls} autoComplete="email" required />
           </Field>
           <Field label={t("auth.login.password")}>
-            <input type="password" placeholder="••••••••" defaultValue="demo-password" className={inputCls} autoComplete="current-password" />
+            <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} className={inputCls} autoComplete="current-password" required />
           </Field>
-
-          <Field label={t("auth.login.demo")}>
-            <div className="grid grid-cols-3 gap-1.5">
-              {ALL_ROLES.map((r) => {
-                const meta = ROLE_META[r];
-                const Icon = meta.icon;
-                const active = r === role;
-                return (
-                  <button
-                    type="button"
-                    key={r}
-                    onClick={() => setRole(r)}
-                    className={`flex items-center gap-1.5 rounded-md border px-2 py-1.5 text-left text-xs transition ${
-                      active
-                        ? "border-primary bg-primary/10 text-primary font-medium"
-                        : "border-border bg-background hover:bg-surface"
-                    }`}
-                    title={meta.label}
-                  >
-                    <Icon className="h-3.5 w-3.5 shrink-0" />
-                    <span className="truncate">{meta.short}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </Field>
-
           <div className="flex items-center justify-between text-sm">
             <label className="flex items-center gap-2 text-muted-foreground">
-              <input type="checkbox" className="rounded border-border" /> {t("auth.login.remember")}
+              <input type="checkbox" checked={remember} onChange={(event) => setRemember(event.target.checked)} className="rounded border-border" /> {t("auth.login.remember")}
             </label>
             <Link href="/auth/forgot-password" className="font-medium text-primary hover:underline">{t("auth.login.forgot")}</Link>
           </div>
-          {err && <p className="text-xs text-danger">{err}</p>}
-          <button type="submit" disabled={busy} className={`${primaryBtn} disabled:opacity-60`}>
-            {busy ? t("auth.login.signingIn") : `${t("auth.login.button")} ${ROLE_META[role].short}`}
+          {err && <p className="rounded-lg border border-danger/20 bg-danger/5 px-3 py-2 text-xs text-danger">{err}</p>}
+          <button type="submit" disabled={busy} className={primaryBtn}>
+            {busy ? t("auth.login.signingIn") : t("auth.login.button")}
           </button>
         </form>
+        <GoogleButton onClick={handleGoogle} disabled={busy} />
       </div>
     </AuthShell>
   );
