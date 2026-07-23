@@ -1,16 +1,20 @@
 import Link from "next/link";
-import { AuthShell, primaryBtn } from "@/components/auth/AuthShell";
+import { AuthShell, primaryBtn, secondaryBtn } from "@/components/auth/AuthShell";
 import { MailCheck } from "lucide-react";
 
 export default function VerifyEmailPage() {
   return (
-    <AuthShell title="Verify your email" description="We've sent a verification link to your inbox.">
+    <AuthShell title="Email OTP verification" description="RSCN verifies registration by email OTP only.">
       <div className="rounded-xl border border-border bg-surface p-6 text-center">
         <MailCheck className="mx-auto h-10 w-10 text-primary" />
-        <p className="mt-3 text-sm text-muted-foreground">Click the link in the email to continue. It may take a minute to arrive.</p>
-        <button className="mt-4 text-sm font-medium text-primary hover:underline">Resend email</button>
+        <p className="mt-3 text-sm text-muted-foreground">
+          After registration, enter the one-time password sent to your email address. Email is the only onboarding verification channel.
+        </p>
       </div>
-      <Link href="/auth/verify-otp" className={`mt-6 ${primaryBtn}`}>Continue</Link>
+      <div className="mt-6 grid gap-2 sm:grid-cols-2">
+        <Link href="/auth/register" className={secondaryBtn}>Register</Link>
+        <Link href="/auth/verify-otp" className={primaryBtn}>Enter OTP</Link>
+      </div>
     </AuthShell>
   );
 }
