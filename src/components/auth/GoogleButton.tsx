@@ -1,14 +1,16 @@
-import Link from "next/link";
+﻿"use client";
 
-export function GoogleButton({ to = "/auth/choose-role", label = "Continue with Google" }: { to?: string; label?: string }) {
+export function GoogleButton({ label = "Continue with Google", onClick, disabled = false }: { label?: string; onClick?: () => void; disabled?: boolean }) {
   return (
-    <Link
-      href={to}
-      className="inline-flex h-11 w-full items-center justify-center gap-3 rounded-lg border border-border bg-background px-4 text-sm font-semibold hover:bg-surface"
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className="inline-flex h-11 w-full items-center justify-center gap-3 rounded-lg border border-border bg-background px-4 text-sm font-semibold hover:bg-surface disabled:cursor-not-allowed disabled:opacity-60"
     >
       <GoogleIcon className="h-5 w-5" />
       {label}
-    </Link>
+    </button>
   );
 }
 
