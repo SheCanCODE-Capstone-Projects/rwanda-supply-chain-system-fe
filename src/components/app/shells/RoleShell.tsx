@@ -1,10 +1,11 @@
-"use client";
+﻿"use client";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import {
   Bell, ChevronDown, LogOut, Menu, MessageSquare, Search, Globe, Sun, Moon, Zap, RefreshCw, Check,
 } from "lucide-react";
-import { Role, ROLE_META } from "@/lib/auth/roles";
+import { ROLE_META, type Role } from "@/lib/auth/roles";
+import { getRoleIcon } from "@/components/auth/RoleIcon";
 import { hasPermission } from "@/lib/auth/permissions";
 import { signOut, useSession, initSession } from "@/lib/auth/session";
 import { ROLE_CONFIG } from "./roleConfig";
@@ -40,7 +41,7 @@ export function RoleShell({ role, children }: { role: Role; children: React.Reac
     router.push(slug ? `${meta.home}/${slug}` : meta.home);
   }
 
-  const RoleIcon = meta.icon;
+  const RoleIcon = getRoleIcon(role);
 
   return (
     <div className="flex min-h-dvh w-full bg-surface" data-role={role}>
@@ -497,3 +498,4 @@ function UserMenu({ onNavigate }: { onNavigate: (path: string) => void }) {
     </div>
   );
 }
+
