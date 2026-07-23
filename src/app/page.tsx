@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 
 export const metadata = {
-  title: "RSCN — Rwanda Supply Chain Network",
+  title: "RSCN ” Rwanda Supply Chain Network",
   description: "Connecting every product, every business, every movement across Rwanda. One national supply chain platform.",
 };
 
@@ -26,7 +26,7 @@ export default function Home() {
             </h1>
             <p className="mt-5 max-w-xl text-lg text-muted-foreground">
               RSCN unifies farmers, cooperatives, manufacturers, warehouses, transporters,
-              retailers, banks and government into one intelligent platform — from harvest to shelf.
+              retailers, banks and government into one intelligent platform ” from harvest to shelf.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/auth/register" className="inline-flex h-11 items-center gap-2 rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground hover:bg-primary-hover">
@@ -40,7 +40,7 @@ export default function Home() {
               </Link>
             </div>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-              {["ISO 27001 aligned", "WCAG AA accessible", "Kinyarwanda · English · French"].map((t) => (
+              {["ISO 27001 aligned", "WCAG A accessible", "Kinyarwanda · English · French"].map((t) => (
                 <span key={t} className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-primary" /> {t}</span>
               ))}
             </div>
@@ -72,9 +72,9 @@ export default function Home() {
               </div>
               <div className="mt-4 space-y-2">
                 {[
-                  ["Maize · 12 tons", "Musanze → Kigali", "In transit", "info"],
-                  ["Coffee · 8 tons", "Huye → Rusizi", "Delivered", "success"],
-                  ["Fertilizer · 40 pallets", "Kigali → Nyagatare", "Loading", "warning"],
+                  ["Maize · 12 tons", "Musanze †’ Kigali", "In transit", "info"],
+                  ["Coffee · 8 tons", "Huye †’ Rusizi", "Delivered", "success"],
+                  ["Fertilizer · 40 pallets", "Kigali †’ Nyagatare", "Loading", "warning"],
                 ].map(([a,b,c,tone]) => (
                   <div key={a} className="flex items-center justify-between rounded-lg border border-border px-3 py-2 text-sm">
                     <div>
@@ -116,7 +116,7 @@ export default function Home() {
         <div className="grid gap-4 md:grid-cols-3">
           {[
             ["Invisible inventory","Producers, warehouses and retailers can't see each other's stock in real time."],
-            ["Manual logistics","Transport is booked over phone; deliveries lose 20–30% of value to delays."],
+            ["Manual logistics","Transport is booked over phone; deliveries lose 20“30% of value to delays."],
             ["Broken financing","Banks and buyers can't verify inventory, contracts or transactions on paper."],
           ].map(([t, d]) => (
             <div key={t} className="rounded-xl border border-border bg-background p-6">
@@ -153,7 +153,7 @@ export default function Home() {
       <Section eyebrow="Platform modules" heading="Everything a national supply chain needs.">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {[
-            [Users, "Identity & Organizations", "KYC, business verification, roles, departments, audit logs."],
+            [Users, "Identity & Organizations", "Verified identities, roles, departments, audit logs."],
             [Package, "Products & Inventory", "Batches, barcodes, QR, quality certificates, expiry tracking."],
             [ShoppingCart, "Smart Marketplace", "RFQs, negotiation, contracts, purchase & sales orders."],
             [Warehouse, "Warehousing", "Zones, racks, reservations, temperature monitoring."],
@@ -259,10 +259,10 @@ export default function Home() {
       <Section eyebrow="FAQ" heading="Common questions.">
         <div className="mx-auto max-w-3xl divide-y divide-border rounded-xl border border-border bg-background">
           {[
-            ["Who can use RSCN?", "Any registered business in Rwanda — farmers, cooperatives, manufacturers, warehouses, transporters, retailers, wholesalers, banks and government institutions."],
+            ["Who can use RSCN?", "Any registered business in Rwanda ” farmers, cooperatives, manufacturers, warehouses, transporters, retailers, wholesalers, banks and government institutions."],
             ["Is my data secure?", "Yes. RSCN is aligned with ISO 27001 and Rwanda's data protection law. All data is encrypted in transit and at rest."],
-            ["How do I get onboarded?", "Register, verify your business (KYC), pick your role, and invite your team. Onboarding typically takes under 24 hours."],
-            ["Do you integrate with banks & tax?", "Yes — direct integrations with BNR, RRA and major commercial banks for payments, invoicing and reconciliation."],
+            ["How do I get onboarded?", "Register, select your role, verify your email OTP, and complete profile setup if your role requires it."],
+            ["Do you integrate with banks & tax?", "Yes ” direct integrations with BNR, RRA and major commercial banks for payments, invoicing and reconciliation."],
           ].map(([q, a]) => (
             <details key={q} className="group p-5">
               <summary className="flex cursor-pointer items-center justify-between text-sm font-semibold">

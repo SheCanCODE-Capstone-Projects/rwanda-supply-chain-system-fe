@@ -1,12 +1,5 @@
-import { HomeSpec } from "./RoleHome";
-import { Role } from "@/lib/auth/roles";
-import {
-  Users, ShieldCheck, Activity, Server, Landmark, Warehouse, Truck, Store,
-  BarChart3, Package, Sprout, ShoppingCart, CreditCard, Boxes,
-  Factory, ClipboardList, FileSignature, Heart, MapPin, Star,
-  CircleDollarSign, PackageCheck, PackageOpen, Building2, Fuel,
-  Route as RouteIcon, Handshake,
-} from "lucide-react";
+import type { HomeSpec } from "./RoleHome";
+import type { Role } from "@/lib/auth/roles";
 
 const range = (n: number, base = 100, jitter = 40) =>
   Array.from({ length: n }, (_, i) => ({ x: `D${i + 1}`, y: base + Math.round(Math.sin(i / 2) * jitter + i * 6) }));
@@ -298,3 +291,4 @@ export const ROLE_HOME_SPEC: Record<Role, HomeSpec> = {
     ],
   },
 };
+

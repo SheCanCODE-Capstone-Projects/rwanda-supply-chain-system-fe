@@ -1,7 +1,7 @@
-"use client";
+﻿"use client";
 import { createContext, useContext, useEffect, type ReactNode } from "react";
-import { initSession, useSession, signInAs, signOut, refreshSession } from "@/lib/auth/session";
-import type { Session } from "@/lib/auth/session";
+import { initSession, useSession, signInWithCredentials, signOut, refreshSession } from "@/lib/auth/session";
+import type { LoginInput, Session } from "@/lib/auth/session";
 import type { Role } from "@/lib/auth/roles";
 import { hasPermission, type Permission } from "@/lib/auth/permissions";
 
@@ -9,7 +9,7 @@ type AuthContextValue = {
   session: Session | null;
   isAuthenticated: boolean;
   role: Role | undefined;
-  signInAs: (role: Role) => Promise<Session | null>;
+  signIn: (input: LoginInput) => Promise<{ session: Session; nextPath: string }>;
   signOut: () => void;
   can: (permission: Permission) => boolean;
 };
@@ -20,18 +20,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const session = useSession();
 
   useEffect(() => {
-    initSession();
+    void initSession();
   }, []);
 
-  // Silently refresh access token when it nears expiry
   useEffect(() => {
     if (!session) return;
     const msUntilRefresh = (session.expiresAt - Math.floor(Date.now() / 1000) - 60) * 1000;
     if (msUntilRefresh <= 0) {
-      refreshSession();
+      void refreshSession();
       return;
     }
-    const timer = setTimeout(() => refreshSession(), msUntilRefresh);
+    const timer = setTimeout(() => void refreshSession(), msUntilRefresh);
     return () => clearTimeout(timer);
   }, [session]);
 
@@ -39,7 +38,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     session,
     isAuthenticated: session !== null,
     role: session?.claims.role,
-    signInAs,
+    signIn: signInWithCredentials,
     signOut,
     can: (permission: Permission) => hasPermission(session?.claims.role, permission),
   };

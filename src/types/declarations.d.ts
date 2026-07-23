@@ -1,3 +1,1 @@
-// Local module declarations for packages without types
-declare module 'lucide-react';
-declare module 'next/link';
+// Project-local type shims can be added here when a dependency does not ship types.

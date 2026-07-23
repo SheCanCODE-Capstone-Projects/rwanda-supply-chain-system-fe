@@ -5,7 +5,7 @@ import { Package, Warehouse, Truck, Users, ShoppingCart, BarChart3, CreditCard, 
 export const metadata = { title: "Solutions — RSCN", description: "Modules for identity, inventory, marketplace, warehousing, transport, procurement and payments." };
 
 const MODULES = [
-  [Users, "Identity & Organizations", "KYC, roles, departments, audit trails."],
+  [Users, "Identity & Organizations", "Email verification, roles, departments, audit trails."],
   [Package, "Products & Inventory", "Batches, barcodes, QR, expiry, low-stock alerts."],
   [ShoppingCart, "Smart Marketplace", "RFQ, negotiation, POs, sales orders, reviews."],
   [Warehouse, "Warehousing", "Zones, racks, reservations, temperature."],
