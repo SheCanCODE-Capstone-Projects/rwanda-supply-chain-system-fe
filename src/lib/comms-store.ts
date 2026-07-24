@@ -16,7 +16,7 @@ export type Thread = {
   time: string; unread: number; messages: Message[];
 };
 
-type State = { notifications: Notification[]; threads: Thread[] };
+export type State = { notifications: Notification[]; threads: Thread[] };
 
 const STORAGE_KEY = "rscn.comms.v1";
 
@@ -111,8 +111,27 @@ export const commsStore = {
   },
 };
 
+// Module-level snapshot cache keyed by selector function reference.
+// useSyncExternalStore requires getSnapshot to return a cached (stable) value
+// when the underlying state hasn't changed, otherwise React throws an infinite
+// loop warning because it sees a new reference on every call.
+const snapshotCache = new WeakMap<
+  (s: State) => unknown,
+  { state: State; result: unknown }
+>();
+
 export function useComms<T>(selector: (s: State) => T): T {
-  return useSyncExternalStore(subscribe, () => selector(state), () => selector(initial));
+  function getSnapshot(): T {
+    const cached = snapshotCache.get(selector);
+    if (cached && cached.state === state) {
+      return cached.result as T;
+    }
+    const result = selector(state);
+    snapshotCache.set(selector, { state, result });
+    return result;
+  }
+
+  return useSyncExternalStore(subscribe, getSnapshot, () => selector(initial));
 }
 
 export function notifForRole(n: Notification, role?: Role): boolean {
