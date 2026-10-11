@@ -1,0 +1,33 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "33-authentication-authorizations",
+    "39-auth-directory",
+    "47-add-hero-background-image",
+    "48-refining-and-auths-dashboards",
+    "8-develop-shared-components-library",
+    "9-create-utility-functions",
+    "main",
+    "origin"
+  ],
+  "parent": {
+    "33-authentication-authorizations": "main",
+    "39-auth-directory": "main",
+    "47-add-hero-background-image": "main",
+    "48-refining-and-auths-dashboards": "main",
+    "8-develop-shared-components-library": "main",
+    "9-create-utility-functions": "main",
+    "main": null,
+    "origin": "main"
+  },
+  "order": [
+    "main",
+    "33-authentication-authorizations",
+    "39-auth-directory",
+    "47-add-hero-background-image",
+    "48-refining-and-auths-dashboards",
+    "8-develop-shared-components-library",
+    "9-create-utility-functions",
+    "origin"
+  ]
+}
